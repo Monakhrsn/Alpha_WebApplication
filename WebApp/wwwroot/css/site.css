@@ -33,6 +33,8 @@
 
   /* Shades of Dark */
   --dark-100: #1A1926;
+  --dark-100-a: rgba(26, 25, 38, 0.2);
+  --dark-100-60: rgba(26, 25, 38, 0.6);
   --dark-200: #1C1D1F;
   --dark-300: #202123;
   --dark-400: #28263B;
@@ -45,8 +47,11 @@
   --orange-dark: #F09330;
   --red: #FF6640;
   --red-dark: #E94D3F;
+  --red-light: #FEF0EC;
+  --red-semilight: #FFAF99;
   --green: #31D482;
   --green-dark: #24B26B;
+  --green-light: #EFFBF1;
   --blue: #2CD9D9;
   --blue-accent: #2D99FF;
   --blue-accent-10: #2d99ff1a;
@@ -84,6 +89,14 @@
   --navlink-background-color: transparent ;
   --navlink-background-hover-color: var(--blue-accent-10);
   --navlink-background-active-color: var(--blue-accent-10) ;
+  --table-header-background-color: var(--white-200);
+  --table-header-text-color: var(--gray-800);
+  --table-tbody-tr-background-hover-color: var(--blue-accent-10);
+  --modal-screen-background-color: var(--dark-100-a);
+  --modal-background-color: var(--white-100);
+  --error-background-color: var(--red-light);
+  --error-text-color: var(--red-dark);
+  --error-border-color: var(--red-semilight);
 }
 [data-theme="dark"] {
   --text-color: var(--white-100);
@@ -304,6 +317,64 @@ h6 {
   color: var(--navlink-text-active-color);
   background-color: var(--navlink-background-active-color)
 }
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+/* tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table tr {
+  display: grid;
+  grid-template-areas: "check info location phone date status actions";
+  grid-template-columns: auto 3fr 3fr 2fr 2fr 2fr 50px; 
+  align-items: center;
+  width: 100%;
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+table th,
+table td {
+  width: 100%;
+  padding: 0 1rem;
+  text-align: left;
+}
+
+table td img {
+  width: 48px;
+  height: 48px;
+}
+
+table thead > tr {
+  background-color: var(--table-header-background-color);
+  color: var(--table-header-text-color);
+}
+
+table tbody > tr {
+  padding: 0.7rem 1rem;
+  margin: 0.5rem 0;
+}
+table thead,
+table tbody {
+  display: contents;
+}
+
+table tbody > tr:hover {
+  background-color: var(--table-tbody-tr-background-hover-color);
+}
+
+
+/* forms */
+table input[type="checkbox"]{
+  height: 15px;
+  width: 15px;
+}
+
 /* sections */
 /* views/pages */
 

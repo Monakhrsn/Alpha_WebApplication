@@ -9,7 +9,7 @@
     <ItemGroup>
       <Folder Include="Models\" />
       <Folder Include="Views\Shared\Partials\Sections\" />
-      <Folder Include="wwwroot\images\" />
+      <Folder Include="wwwroot\images\avatars\" />
     </ItemGroup>
 
     <ItemGroup>
