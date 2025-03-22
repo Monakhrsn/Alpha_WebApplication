@@ -23,6 +23,17 @@
                 modal.style.display = 'none'
                 
                 // clear formdata
+                modal.querySelectorAll('form').forEach(form => {
+                    form.reset()
+                    
+                    const imagePreview = form.querySelector('.image-preview')
+                    if (imagePreview)
+                        imagePreview.src =''
+                    
+                    const imagePreviewer = form.querySelector('.image-previewer')
+                    if (imagePreviewer)
+                        imagePreviewer.classList.remove('selected')
+                })
             }
         })
     })
