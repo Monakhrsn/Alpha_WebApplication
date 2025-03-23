@@ -1,4 +1,3 @@
-using Business.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers;
@@ -17,21 +16,4 @@ public class AdminController : Controller
     {
         return View();
     }
-    
-    [HttpPost]
-    public IActionResult AddClient(AddClientForm form)
-    {
-        if(!ModelState.IsValid)
-            return RedirectToAction("Clients");
-        return View();
-    }
-    
-    [HttpPut]
-    public IActionResult EditClient(AddClientForm form)
-    {
-        if(!ModelState.IsValid)
-            return RedirectToAction("Clients");
-        return View();
-    }
-    
 }

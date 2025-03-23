@@ -421,7 +421,7 @@ h6 {
 
 /* Modal */
 .modal {
-  display: flex;
+  display: none;
   background-color: var(--modal-screen-background-color);
   position: fixed;
   top: 0;
@@ -616,10 +616,6 @@ input[type="checkbox"]{
 
 #addClientModal .modal-content {
   width: 550px;
-}
-
-#editClientModal {
-  display: none;
 }
 
 #editClientModal .modal-content {
