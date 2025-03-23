@@ -21,7 +21,7 @@ public class ClientsController : Controller
         }
             
         // Send data to client service
-        return RedirectToAction("Clients", "Admin");
+        return Ok(new { success = true });
     }
     
     [HttpPut("edit")]
@@ -40,6 +40,6 @@ public class ClientsController : Controller
             }
             
         // Send data to client service
-        return RedirectToAction("Clients", "Admin");
+        return Ok(new { success = true });
     }
 }

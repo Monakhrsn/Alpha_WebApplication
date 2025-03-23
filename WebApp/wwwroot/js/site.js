@@ -70,13 +70,18 @@
                     body: formData,
                 })
                 
-                if (res.status === 400) {
+                if (res.ok) {
+                   const modal = form.closest('.modal') 
+                    if (modal)
+                        modal.style.display = 'none';
+                    
+                    window.location.reload()
+                } 
+                else if (res.status === 400) {
                     const data = await res.json()
                     
                     if (data.errors) {
                         Object.keys(data.errors).forEach(key => {
-                            console.log('1')
-
                             let input = form.querySelector(`input[name="${key}"]`)
                             if (input) {
                                 input.classList.add('input-validation-error')
