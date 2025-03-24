@@ -56,6 +56,7 @@
     
     // handle submit forms
     const forms = document.querySelectorAll('form')
+    
     forms.forEach(form => {
         form.addEventListener('submit', async(e) => {
             e.preventDefault()

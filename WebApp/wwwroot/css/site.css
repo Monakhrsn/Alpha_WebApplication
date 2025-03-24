@@ -70,7 +70,9 @@
   --headline-color: var(--dark-100);
   --border-color: var(--gray-500);
   --border-focus-color: var(--blue-accent);
-  --background-color: var(--white-300);
+  --background-color: var(--white-200);
+  
+  
 
   --btn-blue-text-color: var(--white-100);
   --btn-blue-border-color: var(--white-100);
@@ -601,7 +603,9 @@ input[type="checkbox"]{
 /* views/pages */
 /* sections */
 #team-members {
-  
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
 }
 
 #projects {
@@ -612,6 +616,20 @@ input[type="checkbox"]{
   display: grid;
   grid-template-rows: auto 1fr;
   height: 100%;
+}
+
+#team-members {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+}
+
+#addMemberModal .modal-content {
+  width: 550px;
+}
+
+#editMemberModal .modal-content {
+  width: 550px;
 }
 
 #addClientModal .modal-content {

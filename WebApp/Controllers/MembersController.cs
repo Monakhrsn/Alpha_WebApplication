@@ -1,14 +1,12 @@
-using Microsoft.AspNetCore.Mvc;
 using Business.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers;
 
-public class ClientsController : Controller
+public class MembersController : Controller
 {
-   /* private readonly ClientService _clientService; */
-    
     [HttpPost]
-    public IActionResult Add(AddClientForm form)
+    public IActionResult Add(AddMemberForm form)
     {
         if (!ModelState.IsValid)
         {
@@ -22,21 +20,11 @@ public class ClientsController : Controller
         }
             
         // Send data to client service
-     /*   var result = await _clientService.AddClientAsync(form);
-        if (result)
-        {
-            return Ok(new { success = true });
-        }
-        else
-        {
-            return Problem("Unable to submit data.")
-        } */
-        
         return Ok(new { success = true });
     }
     
     [HttpPost]
-    public IActionResult Edit(EditClientForm form)
+    public IActionResult Edit(EditMemberForm form)
     {
         if(!ModelState.IsValid)
             if (!ModelState.IsValid)
@@ -52,5 +40,5 @@ public class ClientsController : Controller
             
         // Send data to client service
         return Ok(new { success = true });
-    } 
+    }
 }
