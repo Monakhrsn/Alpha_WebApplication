@@ -6,7 +6,6 @@ namespace WebApp.Controllers;
 public class ClientsController : Controller
 {
    /* private readonly ClientService _clientService; */
-    
     [HttpPost]
     public IActionResult Add(AddClientForm form)
     {

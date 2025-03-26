@@ -156,21 +156,22 @@ html, body {
   border-radius: 16px;
   background-color: var(--surface-color);
   box-shadow: 0 4px 4px 3px rgba(160,160,160,0.1);
-
 }
 
 .portal {
   display: grid;
   grid-template-columns: minmax(50px, 270px) 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas: "logo top" "side main";
+  grid-template-rows: minmax(80px, auto) 1fr;
+  grid-template-areas: 
+          "side top" 
+          "side main";
   height: 100dvh;
 }
 
-.portal > .logotype {
-  grid-area: logo;
-  border-right: 1px solid var(--border-color);
+.logotype {
+  border-bottom: 1px solid var(--border-color);
   padding: 1rem 2rem;
+  margin-bottom: 2rem;
 }
 
 .portal > .side {
