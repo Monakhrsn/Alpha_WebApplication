@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers;
 
-[Route("projects")]
 public class ProjectsController : Controller
-{
-    [Route("")]
+{ 
+    /*[Route("")] */
+    [HttpPost]
     public IActionResult Projects()
     {
         return View();

@@ -6,7 +6,7 @@ namespace WebApp.Controllers;
 public class ClientsController : Controller
 {
    /* private readonly ClientService _clientService; */
-    [HttpPost]
+   [HttpPost]
     public IActionResult Add(AddClientForm form)
     {
         if (!ModelState.IsValid)

@@ -7,7 +7,7 @@ public class AuthController : Controller
     // GET
     public IActionResult Login()
     {
-        return LocalRedirect("/projects");
-        //return View();
+        // return LocalRedirect("/projects");
+        return View();
     }
 }

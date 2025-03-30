@@ -4,33 +4,33 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers;
 
-[Route("admin")]
 [Authorize]
+/*[Route("admin")] */
 public class AdminController : Controller
 {
-    [Route("/")]
+  /*  [Route("/")] */
     public IActionResult Index()
     {
         return View();
     }
     
-    [Route("projects")]
+   /* [Route("projects")] */
     public IActionResult Projects()
     {
         return View();
-    }
+    } 
     
    /* [Authorize(Roles = "Admin")] */
-    [Route("members")]
+   /* [Route("members")] */
     public IActionResult Members()
     {
         return View();
-    }
+    } 
     
    /* [Authorize(Roles = "Admin")] */
-    [Route("clients")]
+   /* [Route("clients")] */
     public IActionResult Clients()
     {
         return View();
-    }
+    } 
 }
