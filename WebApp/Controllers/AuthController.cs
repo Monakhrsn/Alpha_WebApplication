@@ -5,18 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers;
 
-public class AuthController(IAuthService _authService) : Controller
+public class AuthController(IAuthService authService) : Controller
 {
+    private readonly IAuthService _authService = authService;
     public IActionResult Login()
     {
-        ViewBag.ErrorMessage = null;
+        ViewBag.ErrorMessage = "";
         return View();
     }
     
     [HttpPost]
     public async Task<IActionResult> Login(MemberLoginForm form, string returnUrl = "~/")
     {
-        ViewBag.ErrorMessage = null;
+        ViewBag.ErrorMessage = "";
         if (ModelState.IsValid)
         {
             var result = await _authService.LoginAsync(form);

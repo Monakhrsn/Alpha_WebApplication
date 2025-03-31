@@ -6,7 +6,7 @@
             <h3>Add Team Member</h3>
             <button type="button" class="btn-close" data-close="true"></button>
         </div>
-        <form novalidate method="post" asp-action="Add" asp-controller="Members">
+        <form id="modal-form" novalidate method="post" asp-action="Add" asp-controller="Members">
             <div class="image-previewer circle">
                 <img class="image-preview" src="" alt=""/>
                 <input asp-for="MemberImage" accept="image/*" class="hide">

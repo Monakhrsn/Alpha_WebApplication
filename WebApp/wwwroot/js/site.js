@@ -54,13 +54,12 @@
     
     
     
-    // handle submit forms
-    const forms = document.querySelectorAll('form')
+    // handle submit forms in modals
+    const forms = document.querySelectorAll('form#modal-form')
     
     forms.forEach(form => {
         form.addEventListener('submit', async(e) => {
             e.preventDefault()
-            
             clearErrorMessages(form)
             
             const formData = new FormData(form)

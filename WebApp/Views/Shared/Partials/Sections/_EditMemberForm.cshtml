@@ -6,7 +6,7 @@
             <h3>Edit Member</h3>
             <button type="button" class="btn-close" data-close="true"></button>
         </div>
-        <form novalidate method="post" asp-action="Edit" asp-controller="Members">
+        <form id="modal-form" novalidate method="post" asp-action="Edit" asp-controller="Members">
             <input asp-for="Id" readonly type="hidden">
             
             <div class="image-previewer circle">
