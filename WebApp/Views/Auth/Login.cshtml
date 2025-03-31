@@ -10,6 +10,17 @@
 <div class="center-screen">
     <section id="login">
         <form class="surface" asp-controller="Auth" asp-action="Login" method="post" novalidate enctype="multipart/form-data">
+            <h1>@ViewData["Title"]</h1>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email"/>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password"/>
+            </div>
 
             @if (!string.IsNullOrEmpty(ViewBag?.ErrorMessage))
             {
@@ -17,17 +28,7 @@
                     @ViewBag!.ErrorMessage
                 </div>
             }
-
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" />
-            </div>
-
+            
             <div class="form-group">
                 <button type="submit" class="btn btn-submit btn-blue">Log In</button>
             </div>

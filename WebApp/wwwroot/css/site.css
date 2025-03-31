@@ -576,6 +576,12 @@ form .field-group {
   position: relative;
 }
 
+label {
+  font-size: 1em;
+  font-weight: 500;
+  text-align: left;
+}
+
 form input,
 form textarea,
 form select {
@@ -673,8 +679,13 @@ input[type="checkbox"]{
 
 #login {
   width: 600px;
+  text-align: center;
+  padding: 4rem;
 }
 
+#login h1 {
+  margin-bottom: 2rem;
+}
 
 
 
