@@ -540,6 +540,10 @@ form {
   width: 100%;
 }
 
+.form-login {
+  width: 30%;
+}
+
 form .form-group {
   display: grid;
   gap: 0.2rem;
