@@ -259,6 +259,18 @@ h6 {
 }
 
 /* links */
+a {
+  color: var(--navlink-text-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--navlink-text-hover-color);
+  text-decoration: underline;
+  transition: border-color ease-in-out .1s;
+  
+}
+
 .nav-link {
   font-family: var(--font-standard);
   font-weight: var(--font-semibold);
@@ -566,6 +578,10 @@ form {
   width: 100%;
 }
 
+.form-footer {
+  margin-top: 3rem;
+}
+
 form .form-group {
   display: grid;
   gap: 0.2rem;
@@ -680,14 +696,22 @@ input[type="checkbox"]{
 #login {
   width: 600px;
   text-align: center;
-  padding: 4rem;
+  padding: 4rem 4rem 1.5rem;
 }
 
 #login h1 {
   margin-bottom: 2rem;
 }
 
+#signup {
+  width: 600px;
+  text-align: center;
+  padding: 4rem 4rem 1.5rem;
+}
 
+#signup h1 {
+  margin-bottom: 2rem;
+}
 
 
 
