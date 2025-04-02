@@ -12,15 +12,16 @@
 </head>
 <body>
 <div class="portal">
-    <div class="side">
+    <aside class="side">
         <partial name="Partials/Components/_AlphaLogoType" />
-        
         <partial name="Partials/Components/_NavLinks"/>
-    </div>
-    <div class="top"></div>
-    <div class="main">
+    </aside>
+    <header class="header">
+        <a class="btn btn-blue btn-logout" asp-controller="Auth" asp-action="Logout">Log out</a>
+    </header>
+    <main class="main">
         @RenderBody()
-    </div>
+    </main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/8c6b7f254e.js" crossorigin="anonymous"></script>

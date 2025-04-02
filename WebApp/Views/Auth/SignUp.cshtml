@@ -6,7 +6,7 @@
 
 <div class="center-screen">
     <section id="signup">
-        <form class="surface" asp-controller="Auth" asp-action="Login" method="post" novalidate enctype="multipart/form-data">
+        <form class="surface" asp-controller="Auth" asp-action="SignUp" method="post" novalidate enctype="multipart/form-data">
             <h1>@ViewData["Title"]</h1>
 
             @if (!string.IsNullOrEmpty(ViewBag?.ErrorMessage))

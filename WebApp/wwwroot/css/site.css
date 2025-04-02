@@ -139,8 +139,11 @@
   --border-color: var(--dark-400);
   --background-color: var(--dark-100);
 
+
   --navlink-text-color: var(--text-color);
+  /*
   --navlink-text-hover-color:var(--blue-accent);
+  */
   --navlink-text-active-color: var(--blue-accent);
   --navlink-background-color: transparent ;
   --navlink-background-hover-color: var(--blue-accent-10);
@@ -189,7 +192,7 @@ html, body {
   grid-template-columns: minmax(50px, 270px) 1fr;
   grid-template-rows: minmax(80px, auto) 1fr;
   grid-template-areas: 
-          "side top" 
+          "side header" 
           "side main";
   height: 100dvh;
 }
@@ -206,13 +209,12 @@ html, body {
   padding: 1rem;
 }
 
-.portal > .top {
-  grid-area: top;
+.portal > .header {
+  grid-area: header;
   border-bottom: 1px solid var(--border-color);
-  padding: 1rem 2rem;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 5rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -307,6 +309,8 @@ a:hover {
   color:var(--btn-blue-text-hover-color);
   border-color: var(--btn-blue-border-hover-color);
   background-color: var(--btn-blue-background-hover-color);
+  text-decoration: none;
+  
 }
 
 .btn-gray {
@@ -324,6 +328,14 @@ a:hover {
 .btn-add::before {
   content: '\2b';
   font-family: var(--font-fa-pro);
+}
+
+.btn-logout::before {
+  content:'\f2f5';
+  font-family: var(--font-fa-pro);
+  font-family: var(--font-fa-free);
+  font-weight: var(--font-bold);
+
 }
 
 .btn-close {
@@ -522,7 +534,8 @@ a:hover {
 
 .nav-links > .nav-link:hover {
   color: var(--navlink-text-hover-color);
-  background-color: var(--navlink-background-hover-color)
+  background-color: var(--navlink-background-hover-color);
+  text-decoration: none;
 }
 
 .nav-links > .nav-link.active {
@@ -628,10 +641,13 @@ form .input-validation-error {
 }
 
 form .field-validation-error {
-  position: absolute;
+  /*
+  CHeck if the modals' styles are ok without them
+  */
+  /*position: absolute;
   z-index: 1;
   right:0.18rem;
-  top: 3px;
+  top: 3px;*/
   font-size: 0.8em;
   background-color:var(--error-background-color);
   color: var(--error-text-color);

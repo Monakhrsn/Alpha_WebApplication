@@ -10,6 +10,8 @@
 <div class="center-screen">
     <section id="login">
         <form class="surface" asp-controller="Auth" asp-action="Login" method="post" novalidate enctype="multipart/form-data">
+            <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl">
+            
             <h1>@ViewData["Title"]</h1>
 
             <div class="form-group">

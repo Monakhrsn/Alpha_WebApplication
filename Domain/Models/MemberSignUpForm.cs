@@ -26,7 +26,7 @@ public class MemberSignUpForm
     
     [Compare(nameof(Password), ErrorMessage = "Passwords don't match")]
     [Display(Name = "ConfirmPassword", Prompt = "Confirm password")]
-    [DataType(DataType.EmailAddress)]
+    [DataType(DataType.Password)]
     public string ConfirmPassword { get; set; } = null!; 
     
     [Display(Name = "Phone", Prompt = "Enter phone number")]
