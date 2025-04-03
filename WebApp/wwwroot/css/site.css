@@ -78,9 +78,7 @@
   --btn-blue-border-hover-color: var(--white-100);
   --btn-blue-background-color: var(--blue-accent);
   --btn-blue-background-hover-color: var(--darkaccent);
-
-
-
+  
   --btn-gray-text-color: var(--dark-100);
   --btn-gray-border-color: var(--white-300);
   --btn-gray-background-color: var(--white-400);
@@ -110,7 +108,7 @@
   have to check out for duplication
   */
   
-  --form-text-color: var(--white-100);
+  --form-text-color: var(--dark-400);
   --form-border-color: var(--white-100);
   --form-background-color: var(--white-100);
   
@@ -130,20 +128,22 @@
   --form-error-message-text-color: var(--red-dark);
   --form-error-message-background-color: var(--red-light);
   --form-error-message-border-color: var(--red-light);
-}
 
+  --card-text-color: var(--dark-400);
+  --card-border-color: var(--white-100);
+  --card-background-color: var(--white-100);
+}
 
 [data-theme="dark"] {
   --text-color: var(--white-100);
   --headline-color: var(--white-100);
   --border-color: var(--dark-400);
   --background-color: var(--dark-100);
-
-
+  
   --navlink-text-color: var(--text-color);
-  /*
-  --navlink-text-hover-color:var(--blue-accent);
-  */
+  
+  /*--navlink-text-hover-color:var(--blue-accent);*/
+  
   --navlink-text-active-color: var(--blue-accent);
   --navlink-background-color: transparent ;
   --navlink-background-hover-color: var(--blue-accent-10);
@@ -458,11 +458,8 @@ a:hover {
 
 .image-previewer.selected::after {
   content: '\f044';
-  
   position: absolute;
   bottom: 5px;
-  
-  
 }
 
 .image-previewer.circle {
@@ -669,8 +666,37 @@ input[type="checkbox"]{
 /* sections */
 #team-members {
   display: grid;
-  grid-template-rows: auto 1fr;
-  height: 100%;
+  gap: 2rem;
+}
+
+.members-list {
+  display: grid;
+  gap: 4rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.member {
+  text-align: center;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.member .jobTitle {
+  background-color: var(--white-400);
+  display: inline;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  margin: 0.5rem auto 2rem;
+  width: 50%;
+}
+
+.card {
+  color: var(--card-text-color);
+  border: 1px solid var(--card-border-color);
+  background-color: var(--card-background-color);
+  box-shadow: 0 4px 4px 3px rgba(196,196,196,0.1);
+  padding: 2rem;
+  border-radius: 14px;
 }
 
 #projects {

@@ -1,12 +1,34 @@
+@model WebApp.ViewModels.MembersWrapper
+
 @{
     ViewData["Title"] = "Team Members";
 }
 
-<partial name="Partials/Sections/_AddMemberForm" />
+<partial name="Partials/Sections/_AddMemberForm" model="Model.NewMember" />
 
 <section id="team-members">
     <header class="flex-between">
-        <h2>@ViewData["Title"]</h2>
+        <h1>@ViewData["Title"]</h1>
         <button type="button"  data-modal="true" data-target="#addMemberModal" class="btn btn-add btn-blue">Add Member</button>
     </header>
+    <div class="members-list">
+        @if (Model.Members != null && Model.Members.Any())
+        {
+            @foreach (var member in Model.Members)
+            {
+                <div class="card member">
+                    <h4 class="name">@member.FirstName @member.LastName</h4>
+                    <div class="jobTitle">@member.JobTitle CEO</div>
+                    <div class="email">@member.Email</div>
+                    <div class="phone">@member.Phone+46 234-565 67 78</div>
+                    <div class="role"></div>
+                </div>
+            }
+        }
+        else
+        {
+            <Span>No member found</Span>
+        }
+    </div>
+    
 </section>

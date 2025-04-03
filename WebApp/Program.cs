@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("AlphaDB")));
-
+builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IMemberService, MemberService>();
 builder.Services.AddIdentity<MemberEntity, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -23,10 +25,6 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LoginPath = "/auth/Login";
     options.SlidingExpiration = true;
 });
-
-builder.Services.AddControllersWithViews();
-
-builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 app.UseHsts();

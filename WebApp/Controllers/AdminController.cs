@@ -1,14 +1,18 @@
+using Business.Interfaces;
 using Business.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.ViewModels;
 
 namespace WebApp.Controllers;
 
 [Authorize]
 /*[Route("admin")] */
-public class AdminController : Controller
+public class AdminController(IMemberService memberService) : Controller
 {
-  /*  [Route("/")] */
+    private readonly IMemberService _memberService = memberService;
+
+    /*  [Route("/")] */
     public IActionResult Index()
     {
         return View();
@@ -22,9 +26,16 @@ public class AdminController : Controller
     
    /* [Authorize(Roles = "Admin")] */
    /* [Route("members")] */
-    public IActionResult Members()
+    public async Task<IActionResult> Members()
     {
-        return View();
+        var members = await _memberService.GetAllMembers();
+        var membersWrapper = new MembersWrapper
+        {
+            NewMember = new AddMemberForm(), // An empty form
+            Members = members // List of members
+        };
+        
+        return View(membersWrapper);
     } 
     
    /* [Authorize(Roles = "Admin")] */
