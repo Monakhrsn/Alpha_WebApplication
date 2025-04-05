@@ -1,10 +1,10 @@
-@model WebApp.ViewModels.MembersWrapper
+@model WebApp.ViewModels.MembersViewModel
 
 @{
     ViewData["Title"] = "Team Members";
 }
 
-<partial name="Partials/Sections/_AddMemberForm" model="Model.NewMember" />
+<partial name="Partials/Sections/_AddMemberForm" model="Model.NewMemberForm" />
 
 <section id="team-members">
     <header class="flex-between">
@@ -17,6 +17,7 @@
             @foreach (var member in Model.Members)
             {
                 <div class="card member">
+                    <img class="image" src="~/images/avatars/avatar-template.svg" alt="A sample avatar image">
                     <h4 class="name">@member.FirstName @member.LastName</h4>
                     <div class="jobTitle">@member.JobTitle CEO</div>
                     <div class="email">@member.Email</div>

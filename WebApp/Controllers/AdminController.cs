@@ -29,13 +29,13 @@ public class AdminController(IMemberService memberService) : Controller
     public async Task<IActionResult> Members()
     {
         var members = await _memberService.GetAllMembers();
-        var membersWrapper = new MembersWrapper
+        var membersViewModel = new MembersViewModel
         {
-            NewMember = new AddMemberForm(), // An empty form
+            NewMemberForm = new AddMemberForm(), // An empty form
             Members = members // List of members
         };
         
-        return View(membersWrapper);
+        return View(membersViewModel);
     } 
     
    /* [Authorize(Roles = "Admin")] */

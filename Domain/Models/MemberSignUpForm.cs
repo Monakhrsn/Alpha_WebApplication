@@ -32,4 +32,8 @@ public class MemberSignUpForm
     [Display(Name = "Phone", Prompt = "Enter phone number")]
     [DataType(DataType.PhoneNumber)]
     public string? Phone { get; set; }
+    
+    [Display(Name = "Terms And Conditions", Prompt = "I accept the term and conditions.")]
+    [Range(typeof(bool), "true", "true", ErrorMessage = "You must accept the terms and conditions to use this site.")]
+    public bool TermsAndConditions { get; set; }
 }

@@ -51,6 +51,14 @@
                 <input asp-for="Phone"/>
                 <span asp-validation-for="Phone"></span>
             </div>
+
+            <div class="form-group">
+                <div class="field-checkbox-group">
+                    <input asp-for="TermsAndConditions"/>
+                    <label asp-for="TermsAndConditions">I accept the <a href="#">Terms and Conditions</a>.</label>
+                    <span asp-validation-for="TermsAndConditions"></span>
+                </div>
+            </div>
             
             <div class="form-group">
                 <button type="submit" class="btn btn-submit btn-blue">Create Account</button>
