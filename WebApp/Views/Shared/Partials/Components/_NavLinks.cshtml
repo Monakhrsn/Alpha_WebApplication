@@ -1,7 +1,7 @@
 <nav class="nav-links">
     <a class="nav-link @(Context.Request.Path == "/" ? "active" : "")" asp-action="Index" asp-controller="Admin">
         <i class="fa-duotone fa-solid fa-table-columns"></i>
-        <span>Dashboard</span>
+        <span>Overview</span>
     </a>
     <a class="nav-link @(Context.Request.Path == "/projects" ? "active" : "")" asp-action="Projects" asp-controller="Admin">
         <i class="fa-duotone fa-solid fa-briefcase"></i>
