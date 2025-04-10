@@ -1,4 +1,4 @@
-using Business.Interfaces;
+/*using Business.Interfaces;
 using Business.Models;
 using Business.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -60,4 +60,4 @@ public class AuthController(IAuthService authService) : Controller
         await _authService.LogoutAsync();
         return LocalRedirect("~/");
     }
-}
+}*/

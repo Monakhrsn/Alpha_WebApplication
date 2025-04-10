@@ -1,46 +1,42 @@
 using Business.Interfaces;
 using Business.Models;
+using Domain.Models;
 using Data.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace Business.Services;
 
-public class AuthService(SignInManager<MemberEntity> signInManager, UserManager<MemberEntity> userManager) : IAuthService
+public class AuthService(IUserService userService, SignInManager<UserEntity> signInManager) : IAuthService
 {
-    private readonly SignInManager<MemberEntity> _signInManager = signInManager;
-    private readonly UserManager<MemberEntity> _userManager = userManager;
+    private readonly IUserService _userService = userService;
+    private readonly SignInManager<UserEntity> _signInManager = signInManager;
 
-    public async Task<bool> LoginAsync(MemberLoginForm loginForm)
+    public async Task<AuthResult> SignInAsync(SignInFormData formData)
     {
-      var result =  await _signInManager.PasswordSignInAsync(loginForm.Email, loginForm.Password, false, false);
-      return result.Succeeded;
-    }
-    
-    public async Task<bool> SignUpAsync(MemberSignUpForm signUpForm)
-    {
-        var memberEntity = new MemberEntity
-        {
-            UserName = signUpForm.Email,
-            FirstName = signUpForm.FirstName,
-            LastName = signUpForm.LastName,
-            Email = signUpForm.Email,
-            PhoneNumber = signUpForm.Phone
-        };
-        
-        var result = await _userManager.CreateAsync(memberEntity, signUpForm.Password);
-        
-        /*if (!result.Succeeded)
-        {
-            foreach (var error in result.Errors)
-            {
-                Console.WriteLine($"Error: {error.Code} - {error.Description}");
-            }
-        }*/
-        return result.Succeeded;
+        if (formData == null)
+            return new AuthResult { Succeeded = false, StatusCode = 400, Error = "Not all required field are supplied."};
+
+        var result =
+            await _signInManager.PasswordSignInAsync(formData.Email, formData.Password, formData.IsPersistent, false);
+        return result.Succeeded
+            ? new AuthResult { Succeeded = true, StatusCode = 200 }
+            : new AuthResult { Succeeded = false, StatusCode = 404, Error = "Invalifd email or password" };
     }
 
-    public async Task LogoutAsync()
+    public async Task<AuthResult> SignUpAsync(SignUpFormData formData)
+    {
+        if (formData == null)
+            return new AuthResult { Succeeded = false, StatusCode = 400, Error = "Not all required field are supplied."};
+
+        var result = await _userService.CreateUserAsync(formData);
+        return result.Succeeded
+            ? new AuthResult { Succeeded = true, StatusCode = 201 }
+            : new AuthResult { Succeeded = false, StatusCode = result.StatusCode, Error = result.Error };
+    }
+
+    public async Task<AuthResult> SignOutAsync()
     {
         await _signInManager.SignOutAsync();
+        return new AuthResult { Succeeded = true, StatusCode = 200 };
     }
 }

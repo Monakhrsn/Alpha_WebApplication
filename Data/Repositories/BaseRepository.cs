@@ -1,13 +1,14 @@
 using System.Diagnostics;
 using System.Linq.Expressions;
 using Data.Contexts;
+using Data.Interfaces;
 using Data.Models;
 using Domain.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories;
 
-public abstract class BaseRepository<TEntity, TModel> where TEntity : class
+public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity, TModel> where TEntity : class
 {
     protected readonly DataContext _context;
     protected readonly DbSet<TEntity> _table;
@@ -92,7 +93,7 @@ public abstract class BaseRepository<TEntity, TModel> where TEntity : class
         return new RepositoryResult<TModel> { Succeeded = true, StatusCode = 200, Result = result };
     }
     
-    public virtual async Task<RepositoryResult<bool>> ExistAsync(Expression<Func<TEntity, bool>> findBy)  
+    public virtual async Task<RepositoryResult<bool>> ExistsAsync(Expression<Func<TEntity, bool>> findBy)  
     {                                                                                    
         var exists = await _table.AnyAsync(findBy);
         return !exists                                                                                     
@@ -117,7 +118,7 @@ public abstract class BaseRepository<TEntity, TModel> where TEntity : class
         }
     }
     
-    public virtual async Task<RepositoryResult<bool>> RemoveAsync(TEntity entity)
+    public virtual async Task<RepositoryResult<bool>> DeleteAsync(TEntity entity)
     {
         if (entity == null)
             return new RepositoryResult<bool> { Succeeded = false, StatusCode = 400, Error = "Entity can't be null." };

@@ -1,4 +1,4 @@
-using Business.Interfaces;
+/*using Business.Interfaces;
 using Business.Models;
 using Data.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -24,4 +24,4 @@ public class MemberService(UserManager<MemberEntity> userManager) : IMemberServi
         
         return members;
     }
-}
+}*/

@@ -15,5 +15,4 @@ public class UserEntity : IdentityUser
     
     public virtual MemberAddressEntity? Address { get; set; }
     public virtual ICollection<ProjectEntity> Projects { get; set; } = [];
-
 } 

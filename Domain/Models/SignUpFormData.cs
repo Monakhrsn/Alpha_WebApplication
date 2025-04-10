@@ -1,6 +1,6 @@
-namespace Business.DTOs;
+namespace Domain.Models;
 
-public class MemberSignUpDto
+public class SignUpFormData
 {
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
