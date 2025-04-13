@@ -20,7 +20,7 @@ public class AuthService(IUserService userService, SignInManager<UserEntity> sig
             await _signInManager.PasswordSignInAsync(formData.Email, formData.Password, formData.IsPersistent, false);
         return result.Succeeded
             ? new AuthResult { Succeeded = true, StatusCode = 200 }
-            : new AuthResult { Succeeded = false, StatusCode = 404, Error = "Invalifd email or password" };
+            : new AuthResult { Succeeded = false, StatusCode = 404, Error = "Invalid email or password" };
     }
 
     public async Task<AuthResult> SignUpAsync(SignUpFormData formData)

@@ -1,6 +1,6 @@
 // user entity is as same as member entity
 
-/*using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace Data.Entities;
 
@@ -16,4 +16,4 @@ public class MemberEntity : IdentityUser
     public string? JobTitle { get; set; }
     
     public virtual MemberAddressEntity? Address { get; set; }
-} */
+} 

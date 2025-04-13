@@ -4,5 +4,5 @@ namespace Business.Interfaces;
 
 public interface IMemberService
 {
-    Task<IEnumerable<Member>> GetAllMembers();
+    /*Task<IEnumerable<Member>> GetAllMembers();*/
 }

@@ -19,7 +19,6 @@ public class AuthController(IAuthService authService) : Controller
     public async Task<IActionResult> SignUp(SignUpViewModel model)
     {
         ViewBag.ErrorMessage = null;
-        
         if (!ModelState.IsValid)
             return View(model);
         var signUpFormData = model.MapTo<SignUpFormData>();
@@ -48,6 +47,7 @@ public class AuthController(IAuthService authService) : Controller
         
         if (!ModelState.IsValid)
             return View(model);
+        
         var signInFormData = model.MapTo<SignInFormData>();
         var result = await _authService.SignInAsync(signInFormData);
         if (result.Succeeded)

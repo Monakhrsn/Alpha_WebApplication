@@ -1,27 +1,26 @@
-/*using Business.Interfaces;
+using Business.Interfaces;
 using Business.Models;
 using Data.Entities;
+using Data.Interfaces;
+using Domain.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Business.Services;
 
-public class MemberService(UserManager<MemberEntity> userManager) : IMemberService
+public class MemberService(IMemberRepository memberRepository) : IMemberService
 {
-    private readonly UserManager<MemberEntity> _userManager = userManager;
-    public async Task<IEnumerable<Member>> GetAllMembers()
+    private readonly IMemberRepository _memberRepository = memberRepository;
+
+    public async Task<MemberResult> GetMembersAsync()
     {
-        var list = await _userManager.Users.ToListAsync();
-        var members = list.Select(m => new Member
-        {
-            Id = m.Id,
-            FirstName = m.FirstName,
-            LastName = m.LastName,
-            Email = m.Email,
-            Phone = m.PhoneNumber,
-            JobTitle = m.JobTitle,
-        });
-        
-        return members;
+        var result = await _memberRepository.GetAllAsync();
+        return result.MapTo<MemberResult>();
     }
-}*/
+}
+
+
+
+
+
+

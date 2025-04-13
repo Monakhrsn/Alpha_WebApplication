@@ -12,8 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("AlphaDB")));
 builder.Services.AddControllersWithViews();
-/*builder.Services.AddScoped<IAAuthService, AuthService>();
-builder.Services.AddScoped<IMemberService, MemberService>();*/
+builder.Services.AddScoped<IMemberService, MemberService>();
+builder.Services.AddScoped<IMemberRepository, MemberRepository>();
+
 builder.Services.AddIdentity<UserEntity, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
