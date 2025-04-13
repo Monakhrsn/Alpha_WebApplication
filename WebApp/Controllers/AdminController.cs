@@ -8,9 +8,9 @@ namespace WebApp.Controllers;
 
 [Authorize]
 /*[Route("admin")] */
-public class AdminController(IMemberService memberService) : Controller
+public class AdminController() : Controller
 {
-    private readonly IMemberService _memberService = memberService;
+    // private readonly IMemberService _memberService = memberService;
 
     /*  [Route("/")] */
     public IActionResult Index()
@@ -26,17 +26,17 @@ public class AdminController(IMemberService memberService) : Controller
     
    /* [Authorize(Roles = "Admin")] */
    /* [Route("members")] */
-    public async Task<IActionResult> Members()
-    {
-        var members = await _memberService.GetAllMembers();
-        var membersViewModel = new MembersViewModel
-        {
-            NewMemberForm = new AddMemberForm(), // An empty form
-            Members = members // List of members
-        };
-        
-        return View(membersViewModel);
-    } 
+    // public async Task<IActionResult> Members()
+    // {
+    //     var members = await _memberService.GetAllMembers();
+    //     var membersViewModel = new MembersViewModel
+    //     {
+    //         NewMemberForm = new AddMemberForm(), // An empty form
+    //         Members = members // List of members
+    //     };
+    //     
+    //     return View(membersViewModel);
+    // } 
     
    /* [Authorize(Roles = "Admin")] */
    /* [Route("clients")] */

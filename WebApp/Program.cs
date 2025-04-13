@@ -25,15 +25,14 @@ builder.Services.AddIdentity<UserEntity, IdentityRole>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/auth/Login";
+    options.LoginPath = "/auth/SignIn";
     options.AccessDeniedPath = "/auth/AccessDenied";
     options.Cookie.HttpOnly = true;
     /*options.Cookie.SecurePolicy = CookieSecurePolicy.Always;*/
     options.Cookie.IsEssential = true;
-    options.Cookie.Expiration = TimeSpan.FromDays(1);
+    options.ExpireTimeSpan = TimeSpan.FromDays(1);
     options.SlidingExpiration = true;
-     
-    options.SlidingExpiration = true;
+    
 });
 
 builder.Services.AddScoped<IClientRepository, ClientRepository>();

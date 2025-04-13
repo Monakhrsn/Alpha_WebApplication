@@ -13,10 +13,8 @@ public class ProjectsController(IProjectService projectService) : Controller
     private readonly IProjectService _projectService = projectService;
     public async Task<IActionResult> Index()
     {
-        var model = new ProjectsViewModel
-        {
-            Projects = await _projectService.GetProjectsAsync(),
-        };
+        var model = await _projectService.GetProjectsAsync();
+        
         
         return View(model);
     }
@@ -31,7 +29,7 @@ public class ProjectsController(IProjectService projectService) : Controller
      }
      
     [HttpPost]
-    public async Task<IActionResult> Update(EditProjectViewModel model)
+    public async Task<IActionResult> Update(int model)
     {
         return Json(new {});
     }

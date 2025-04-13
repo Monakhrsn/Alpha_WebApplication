@@ -35,7 +35,7 @@ public class AddProjectViewModel
     [Required(ErrorMessage = "Required")]
     public DateTime? EndDate { get; set; }
     
-    /*[DataType(DataType.decimal)]*/
+    [DataType(DataType.Currency)]
     [Display(Name = "Budget" , Prompt = "Budget")]
     [Required(ErrorMessage = "Required")]
     public decimal? Budget { get; set; }
