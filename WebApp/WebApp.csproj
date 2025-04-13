@@ -14,6 +14,8 @@
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\AAuth\Login.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\AAuth\SignUp.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
