@@ -48,12 +48,10 @@
                 <span asp-validation-for="ConfirmPassword"></span>
             </div>
 
-            <div class="form-group">
-                <div class="field-checkbox-group">
-                    <input asp-for="TermsAndConditions"/>
-                    <label asp-for="TermsAndConditions">I accept the <a href="#">Terms and Conditions</a>.</label>
-                    <span asp-validation-for="TermsAndConditions" class="text-danger"></span>
-                </div>
+            <div class="form-check">
+                <input class="form-check-input" asp-for="TermsAndConditions"/>
+                <label class="form-check-label" asp-for="TermsAndConditions">I accept the <a href="/">Terms and Conditions</a>.</label>
+                <span asp-validation-for="TermsAndConditions" class="text-danger"></span>
             </div>
             
             <div class="form-group">

@@ -88,7 +88,7 @@
 
   --surface-color: var(--white-100);
 
-  --navlink-text-color: var(--text-color);
+  --navlink-text-color: var(--blue-accent);
   --navlink-text-hover-color:var(--blue-accent);
   --navlink-text-active-color: var(--blue-accent);
   --navlink-background-color: transparent ;
@@ -185,6 +185,11 @@ html, body {
   border-radius: 16px;
   background-color: var(--surface-color);
   box-shadow: 0 4px 4px 3px rgba(160,160,160,0.1);
+}
+
+form .form-group,
+form .form-check {
+  text-align: left;
 }
 
 .portal {
@@ -605,10 +610,9 @@ form .field-group {
 label {
   font-size: 1em;
   font-weight: 500;
-  text-align: left;
 }
 
-form input,
+form input:not([type="checkbox"]),
 form textarea,
 form select {
   width: 100%;
