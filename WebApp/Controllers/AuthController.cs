@@ -64,6 +64,4 @@ public class AuthController(IAuthService authService) : Controller
         await _authService.SignOutAsync();
         return LocalRedirect("~/");
     }
-    
-
 }

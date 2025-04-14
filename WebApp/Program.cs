@@ -6,6 +6,7 @@ using Data.Interfaces;
 using Data.Repositories;
 using Domain.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,21 +59,14 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
-/*
+
 app.UseRewriter(new RewriteOptions().AddRedirect("^$", "/Admin/overview"));
-*/
+
 
 app.MapControllerRoute(
         name: "default",
-      
-        pattern: "{controller=Admin}/{action=Index}/{id?}")
-     
-     
-        /*
-        pattern: "{controller=Overview}/{action=Index}/{id?}")
-        */
- 
-
+        pattern: "{controller=Overview}/{action=Index}/{id?}"
+        )
     .WithStaticAssets();
 
 app.Run();

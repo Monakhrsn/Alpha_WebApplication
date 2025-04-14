@@ -1,11 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using Business.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.Controllers;
 
+[Authorize]
+[Route("admin/[controller]")]
 public class ClientsController : Controller
 {
    /* private readonly ClientService _clientService; */
+   
+   [HttpGet]
+   public IActionResult Index()
+   {
+       return View();
+   }
+   
    [HttpPost]
     public IActionResult Add(AddClientForm form)
     {

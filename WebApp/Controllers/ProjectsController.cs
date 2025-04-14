@@ -3,11 +3,14 @@ using Data.Interfaces;
 using Domain.Extensions;
 using Domain.Models;
 using Domain.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
 namespace WebApp.Controllers;
 
+[Authorize]
+[Route("admin/[controller]")]
 public class ProjectsController(IProjectService projectService) : Controller
 {
     private readonly IProjectService _projectService = projectService;

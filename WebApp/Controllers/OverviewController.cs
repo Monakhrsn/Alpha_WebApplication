@@ -1,12 +1,14 @@
-/*using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers;
 
+[Authorize]
+[Route("admin/[controller]")]
 public class OverviewController : Controller
 {
-    [Route("admin/overview")]
     public IActionResult Index()
     {
         return View();
     }
-}*/
+}
