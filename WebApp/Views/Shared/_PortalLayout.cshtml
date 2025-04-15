@@ -16,8 +16,21 @@
         <partial name="Partials/Components/_AlphaLogoType" />
         <partial name="Partials/Components/_NavLinks"/>
     </aside>
-    <header class="header">
-        <a class="btn btn-blue btn-logout" asp-controller="Auth" asp-action="Logout">Log out</a>
+    <header class="header" id="header">
+        <form class="search-form" method="get" asp-controller="" asp-action="" novalidate>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" class="form-search-input" placeholder="Search anything..."/>
+        
+        </form>
+        <button type="button" data-type="dropdown" data-target="#notifications" class="btn-notification">
+            <i class="dot dot-red fa-solid fa-circle hide"></i>
+            <i class="fa-solid fa-bell"></i>
+        </button>
+        <button type="button" data-type="dropdown" data-target="#account" class="btn-account">
+            <img src="/images/avatars/woman-long.svg" alt="template-avatar" />
+        </button>
+
+        <button class="btn btn-blue btn-logout" data-type="dropdown" asp-controller="Auth" asp-action="Logout">Log out</button>
     </header>
     <main class="main">
         @RenderBody()

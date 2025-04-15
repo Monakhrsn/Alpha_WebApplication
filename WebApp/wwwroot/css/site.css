@@ -63,6 +63,8 @@
   --darkaccent: #2682D9;
   --purple: #826AF9;
   --darkpurple: #634CD4;
+  --blue-semilight: #dae1e6;
+  --transparent: rgba(0, 0, 0, 0); ;
 
   --text-color: var(--dark-400);
   --text-muted-color: var(--gray-800);
@@ -72,6 +74,11 @@
   --border-focus-color: var(--blue-accent);
   --background-color: var(--white-200);
   
+  --dot-background-color: var(--white-200);
+  --dot-red-text-color: var(--red);
+  --dot-yellow-text-color: var(--yellow);
+  --dot-green-text-color: var(--green);
+
   --btn-blue-text-color: var(--white-100);
   --btn-blue-border-color: var(--white-100);
   --btn-blue-text-hover-color: var(--white-100);
@@ -85,13 +92,23 @@
   --btn-gray-text-hover-color: var(--dark-100);
   --btn-gray-border-hover-color: var(--gray-100);
   --btn-gray-background-hover-color: var(--gray-100);
+  
+  --btn-account-text-color: var(--dark-400);
+  --btn-account-border-color: var(--transparent);
+  --btn-account-background-color: var(--transparent);
+  
+  --btn-notification-text-color: var(--dark-400);
+  --btn-notification-text-hover-color: var(--dark-400);
+  --btn-notification-background-color: var(--transparent);
+  --btn-notification-background-hover-color: var(--blue-light-opacity);
+
 
   --surface-color: var(--white-100);
 
   --navlink-text-color: var(--blue-accent);
   --navlink-text-hover-color:var(--blue-accent);
   --navlink-text-active-color: var(--blue-accent);
-  --navlink-background-color: transparent ;
+  --navlink-background-color: var(--transparent) ;
   --navlink-background-hover-color: var(--blue-accent-10);
   --navlink-background-active-color: var(--blue-accent-10) ;
   
@@ -120,6 +137,12 @@
   --form-input-border-color: var(--gray-400);
   --form-input-border-focus-color: var(--blue-semilight);
   
+  --form-search-input-text-color: var(--dark-400);
+  --form-search-input-placeholder-color: var(--gray-600);
+  --form-search-input-background-color: var(--transparent);
+  --form-search-input-border-color: var(--transparent);
+  --form-search-input-border-focus-color: var(--blue-semilight);
+
   --form-error-input-text-color: var(--dark-200);
   --form-error-input-background-color: var(--white-100);
   --form-error-input-border-color: var(--red-semilight);
@@ -141,11 +164,8 @@
   --background-color: var(--dark-100);
   
   --navlink-text-color: var(--text-color);
-  
-  /*--navlink-text-hover-color:var(--blue-accent);*/
-  
   --navlink-text-active-color: var(--blue-accent);
-  --navlink-background-color: transparent ;
+  --navlink-background-color: var(--transparent) ;
   --navlink-background-hover-color: var(--blue-accent-10);
   --navlink-background-active-color: var(--blue-accent-10);
 }
@@ -192,6 +212,43 @@ form .form-check {
   text-align: left;
 }
 
+form input.form-search-input[type="search"] {
+  /*
+  position: relative;
+  */
+  width: 100%;
+  min-height: 40px;
+  font-size: 1em;
+  font-weight: 400;
+  font-style: normal;
+  font-family: var(--font-standard);
+  color: var(--form-input-text-color);
+  padding: 0.5rem 1rem;
+  outline: none;
+  background-color: var(--form-search-input-background-color);
+  border: none;
+  border-radius: 0;
+  transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+}
+
+form input.form-search-input[type="search"]:focus {
+  border-bottom: 1px solid var(--form-search-input-border-focus-color)
+}
+
+form .form-search-input::placeholder {
+  color: var(--form-input-placeholder-color);
+  font-size: 0.9em;
+}
+
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
 .portal {
   display: grid;
   grid-template-columns: minmax(50px, 270px) 1fr;
@@ -211,13 +268,13 @@ form .form-check {
 .portal > .side {
   grid-area: side;
   border-right: 1px solid var(--border-color);
-  padding: 1rem;
+  padding: 1.5rem 2rem;
 }
 
 .portal > .header {
   grid-area: header;
   border-bottom: 1px solid var(--border-color);
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -304,6 +361,64 @@ a:hover {
   gap: 0.5rem;
 }
 
+.btn-account {
+  transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+  background-color: var(--btn-account-background-color);
+  border: 1px solid var(--btn-account-border-color);
+  color: var(--btn-account-text-color);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.btn-account img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
+
+.btn-notification {
+  transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+  background-color: var(--btn-notification-background-color);
+  border: 1px solid var(--transparent);
+  color: var(--btn-notification-text-color);
+  font-size: 1.4em;
+  position: relative;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.btn-notification .dot {
+  position:absolute;
+  right: 3px;
+  top: -1px;
+  z-index: 1;
+}
+
+.btn-notification .hide {
+  display: none;
+}
+
+.dot {
+  font-size: 0.5em;
+  background-color: var(--dot-background-color);
+  padding: 2px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot.dot-red {
+  color: var(--dot-red-text-color);
+}
+
 .btn-blue {
   color:var(--btn-blue-text-color);
   border-color: var(--btn-blue-border-color);
@@ -315,7 +430,6 @@ a:hover {
   border-color: var(--btn-blue-border-hover-color);
   background-color: var(--btn-blue-background-hover-color);
   text-decoration: none;
-  
 }
 
 .btn-gray {
@@ -332,12 +446,11 @@ a:hover {
 
 .btn-add::before {
   content: '\2b';
-  font-family: var(--font-fa-pro);
+  font-family: var(--font-fa-free);
 }
 
 .btn-logout::before {
   content:'\f2f5';
-  font-family: var(--font-fa-pro);
   font-family: var(--font-fa-free);
   font-weight: var(--font-bold);
 
@@ -523,7 +636,7 @@ a:hover {
   font-family: var(--font-standard);
   font-weight: var(--font-semibold);
   text-decoration: none;
-  color: var(--navlink-text-color);
+  color: var(--text-color);
   background-color: var(--navlink-background-color);
   border-radius: 1rem;
   padding: 1rem 1.5rem;
@@ -634,7 +747,7 @@ form input::placeholder,
 form textarea::placeholder,
 form select::placeholder {
   color: var(--text-extra-muted-color);
-  font-size: 0.9rem;
+  font-size: 0.9em;
 }
 
 form .input-validation-error {
@@ -664,6 +777,7 @@ input[type="checkbox"]{
   height: 15px;
   width: 15px;
 }
+
 
 
 /* views/pages */
@@ -758,6 +872,8 @@ input[type="checkbox"]{
 #signup h1 {
   margin-bottom: 2rem;
 }
+
+
 
 
 
