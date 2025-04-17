@@ -1,0 +1,55 @@
+@*@model TModel
+
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Domain.Models.AddProjectFormData
+
+<div id="addClientModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add Project</h3>
+            <button type="button" class="btn-close" data-close="true"></button>
+        </div>
+        <form id="modal-form" novalidate method="post" asp-action="Add" asp-controller="Projects">
+            <div class="image-previewer circle">
+                <img class="image-preview" src=""  alt=""/>
+                <input asp-for="ProjectImage" accept="image/*" class="hide">
+            </div>
+            <div class="form-group">
+                <label  asp-for="ProjectName" ></label>
+                <div class="field-group">
+                    <input asp-for="ProjectName" />
+                    <span asp-validation-for="ProjectName"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label  asp-for="ClientName" ></label>
+                <div class="field-group">
+                    <input asp-for="ClientName" />
+                    <span asp-validation-for="ClientName"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" ></label>
+                <div class="field-group">
+                    <input asp-for="Description" />
+                    <span asp-validation-for="Description"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location"  ></label>
+                <div class="field-group">
+                    <input asp-for="Location" />
+                    <span asp-validation-for="Location"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone"></label>
+                <div class="field-group">
+                    <input asp-for="Phone" />
+                    <span asp-validation-for="Phone"></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-submit btn-blue">Create</button>
+        </form>
+    </div>
+</div>*@
