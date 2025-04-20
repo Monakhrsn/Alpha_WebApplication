@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
-namespace Business.Models;
+namespace Domain.Models;
 
 public class EditMemberForm
 {
@@ -9,7 +9,6 @@ public class EditMemberForm
     
     [DataType(DataType.Upload)]
     [Display(Name = "Member Image" , Prompt = "Select an image")]
-
     public IFormFile? MemberImage { get; set; }
     
     [DataType(DataType.Text)]

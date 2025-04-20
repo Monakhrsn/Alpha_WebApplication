@@ -1,11 +1,12 @@
-﻿const dropdowns = document.querySelectorAll('[data-type="dropdown"]')
-
+﻿const dropdowns = document.querySelectorAll('[data-type="dropdown"]');
 document.addEventListener('click', function (event) {
     let clickedDropdown = null
     dropdowns.forEach(dropdown => {
         const targetId = dropdown.getAttribute('data-target')
+        if (!targetId || !targetId.startsWith('#')) return;
+        
         const targetElement = document.querySelector(targetId)
-        console.log(targetElement, targetId)
+        if (!targetElement) return;
 
         if (dropdown.contains(event.target)) {
             clickedDropdown = targetElement
@@ -19,21 +20,16 @@ document.addEventListener('click', function (event) {
             targetElement.classList.toggle('dropdown-show')
         }
     })
-
-    if (!clickedDropdown && !event.target.closest('.dropdown')) {
-        document.querySelectorAll('.dropdown.dropdown-show').forEach(openDropdown => {
-            openDropdown.classList.remove('dropdown-show')
-        })
-    }
 })
 
 
+const modals = document.querySelectorAll('[data-type="modal"]')
 
 document.addEventListener("DOMContentLoaded", () => {
     const previewSize = 150
     
-    // open modal
-    const modalButtons = document.querySelectorAll('[data-modal="true"]')
+  // open modal
+    const modalButtons = document.querySelectorAll('[data-type="modal"]')
     modalButtons.forEach(button => {
         button.addEventListener('click', () => {
             const modalTarget = button.getAttribute('data-target')
@@ -41,10 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if(modal)
                 modal.style.display = 'flex';
-                
         })
     })
-    
+
     // Close modal
     const closeButtons = document.querySelectorAll('[data-close="true"]')
     closeButtons.forEach(button => {
@@ -68,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })
     })
-    
+
     // handle image previewer
     document.querySelectorAll('.image-previewer').forEach(previewer => {
         const fileInput = previewer.querySelector('input[type="file"]')
@@ -82,8 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
               processImage(file, imagePreview, previewer, previewSize)
         })
     })
-    
-    
     
     // handle submit forms in modals
     const forms = document.querySelectorAll('form#modal-form')

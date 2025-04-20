@@ -1,5 +1,5 @@
-using Business.Models;
 using Data.Entities;
+using Domain.Models;
 
 namespace Data.Interfaces;
 

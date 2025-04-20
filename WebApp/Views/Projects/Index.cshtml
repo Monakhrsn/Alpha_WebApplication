@@ -2,9 +2,20 @@
     ViewData["Title"] = "Projects";
 }
 
-<section id="projects">
-    <header class="flex-between">
+<partial name="Partials/Sections/_AddProjectForm"/>
+
+<section id="projects" class="page">
+    <header class="page-header">
         <h1>@ViewData["Title"]</h1>
-        <button type="button" class="btn btn-add btn-blue">Add Project</button>
+        <button
+            type="button"
+            data-type="modal"
+            data-target="#add-project-modal" 
+            class="btn btn-add btn-blue"
+        >
+            Add Project
+        </button>
     </header>
 </section>
+
+

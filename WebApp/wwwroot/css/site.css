@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
 
@@ -115,6 +116,20 @@
   --btn-notification-background-color: var(--transparent);
   --btn-notification-background-hover-color: var(--blue-light-opacity);
   
+  --btn-text-color: var(--white-100);
+  --btn-border-color: var(--white-100);
+  --btn-background-color: var(--blue);
+  --btn-hover-text-color: var(--white-100);
+  --btn-hover-border-color: var(--white-100);
+  --btn-hover-background-color: var(--darkblue);
+
+  --btn-close-text-color: var(--dark-400);
+  --btn-close-border-color: var(--transparent);
+  --btn-close-background-color: var(--transparent);
+  --btn-close-text-hover-color: var(--gray-400);
+  --btn-close-border-hover-color: var(--transparent);
+  --btn-close-background-hover-color: var(--blue-light-opacity);
+
   --account-name-background-color: var(--white-200);
   --account-name-text-color: var(--dark-400);
   --account-name-border-color: var(--white-200);
@@ -136,13 +151,6 @@
   --user-notification-number-background-color: var(--red);
   --user-notification-number-text-color: var(--white-100);
   --user-notification-text-muted-color: var(--gray-600);
-  
-  --btn-close-text-color: var(--dark-400);
-  --btn-close-border-color: var(--transparent);
-  --btn-close-background-color: var(--transparent);
-  --btn-close-text-hover-color: var(--gray-400);
-  --btn-close-border-hover-color: var(--transparent);
-  --btn-close-background-hover-color: var(--blue-light-opacity);
 
   --surface-color: var(--white-100);
 
@@ -252,6 +260,7 @@ html, body {
   border-radius: 16px;
   background-color: var(--surface-color);
   box-shadow: 0 4px 4px 3px rgba(160,160,160,0.1);
+  margin-top: 1rem;
 }
 
 form .form-group,
@@ -314,7 +323,7 @@ form .form-search-input::placeholder {
 .portal > .header {
   grid-area: header;
   border-bottom: 1px solid var(--border-color);
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 3rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -389,16 +398,29 @@ a:hover {
 
 /* buttons */
 .btn {
+  transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
   border-radius: 14px;
   font-size: 1em;
   font-weight: var(--font-regular);
   font-family: var(--font-standard);
-  padding: 0.7rem 1.5rem;
+  padding: 0.8rem 1.5rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+
+  background-color: var(--btn-background-color);
+  border: 2px solid var(--btn-border-color);
+  color: var(--btn-text-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--btn-hover-background-color);
+    border: 2px solid var(--btn-hover-border-color);
+    color: var(--btn-hover-text-color);
 }
 
 .btn-account {
@@ -680,6 +702,7 @@ a:hover {
 
 /* Modal */
 .modal {
+  z-index: 500;
   display: none;
   background-color: var(--modal-screen-background-color);
   position: fixed;
@@ -689,6 +712,14 @@ a:hover {
   bottom: 0;
   justify-content: center;
   align-items: center;
+}
+
+.modal .modal-show {
+  display: flex; !important;
+} 
+
+.modal .btn-close{
+  z-index: 999;
 }
 
 .modal .modal-content {
@@ -892,6 +923,18 @@ input[type="checkbox"]{
   width: 50%;
 }
 
+.page {
+  padding: 1rem;
+  
+}
+
+.page .page-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+}
+
 .card {
   position: relative;
   color: var(--card-text-color);
@@ -907,10 +950,11 @@ input[type="checkbox"]{
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  background-color: transparent;
 }
 
 .card .card-body {
-  margin: 0 2rem;
+  /*margin: 0 2rem;*/
 }
 
 .card .card-footer {
@@ -997,6 +1041,10 @@ input[type="checkbox"]{
   
 }
 
+#add-project-modal .card {
+  width: 550px;
+}
+
 #clients {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -1009,19 +1057,19 @@ input[type="checkbox"]{
   height: 100%;
 }
 
-#addMemberModal .modal-content {
+#add-member-modal .modal-content {
   width: 550px;
 }
 
-#editMemberModal .modal-content {
+#edit-member-modal .modal-content {
   width: 550px;
 }
 
-#addClientModal .modal-content {
+#add-client-modal .modal-content {
   width: 550px;
 }
 
-#editClientModal .modal-content {
+#edit-client-modal .modal-content {
   width: 550px;
 }
 

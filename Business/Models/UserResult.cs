@@ -1,3 +1,5 @@
+using Domain.Models;
+
 namespace Business.Models;
 
 public class UserResult : ServiceResult
