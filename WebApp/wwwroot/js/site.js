@@ -1,34 +1,66 @@
-﻿const dropdowns = document.querySelectorAll('[data-type="dropdown"]');
-document.addEventListener('click', function (event) {
-    let clickedDropdown = null
-    dropdowns.forEach(dropdown => {
-        const targetId = dropdown.getAttribute('data-target')
-        if (!targetId || !targetId.startsWith('#')) return;
-        
-        const targetElement = document.querySelector(targetId)
-        if (!targetElement) return;
-
-        if (dropdown.contains(event.target)) {
-            clickedDropdown = targetElement
-            
-            document.querySelectorAll('.dropdown.dropdown-show').forEach(openDropdown => {
-                if (openDropdown !== targetElement) {
-                    openDropdown.classList.remove('dropdown-show')
-                }
-            })
-
-            targetElement.classList.toggle('dropdown-show')
-        }
-    })
-})
-
-
+﻿
 const modals = document.querySelectorAll('[data-type="modal"]')
 
 document.addEventListener("DOMContentLoaded", () => {
     const previewSize = 150
     
-  // open modal
+    // header dropdowns 
+    const dropdowns = document.querySelectorAll('[data-type="dropdown"]');
+    document.addEventListener('click', function (event) {
+        let clickedDropdown = null
+        dropdowns.forEach(dropdown => {
+            const targetId = dropdown.getAttribute('data-target')
+            if (!targetId || !targetId.startsWith('#')) return;
+
+            const targetElement = document.querySelector(targetId)
+            if (!targetElement) return;
+
+            if (dropdown.contains(event.target)) {
+                clickedDropdown = targetElement
+
+                document.querySelectorAll('.dropdown.dropdown-show').forEach(openDropdown => {
+                    if (openDropdown !== targetElement) {
+                        openDropdown.classList.remove('dropdown-show')
+                    }
+                })
+
+                targetElement.classList.toggle('dropdown-show')
+            }
+        })
+    })
+
+    // clients dropdown
+    document.querySelectorAll('.form-select').forEach(select => {
+        const trigger = select.querySelector('.form-select-trigger');
+        const options = select.querySelector('.form-select-options');
+        const text = select.querySelector('.form-select-text');
+        const hiddenInput = select.querySelector('input[type="hidden"]');
+        
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation(); // prevent closing immediately
+            options.classList.toggle('show');
+        });
+        
+        options.querySelectorAll('.form-select-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const value = option.getAttribute('data-value');
+                const label = option.textContent;
+
+                hiddenInput.value = value;
+                text.textContent = label;
+                options.classList.remove('show');
+            });
+        });
+
+        // Close if clicked outside
+        document.addEventListener('click', () => {
+            options.classList.remove('show');
+        });
+    });
+
+
+
+    // open modal
     const modalButtons = document.querySelectorAll('[data-type="modal"]')
     modalButtons.forEach(button => {
         button.addEventListener('click', () => {
