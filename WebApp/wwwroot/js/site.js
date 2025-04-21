@@ -32,34 +32,43 @@ document.addEventListener("DOMContentLoaded", () => {
     // clients dropdown
     document.querySelectorAll('.form-select').forEach(select => {
         const trigger = select.querySelector('.form-select-trigger');
-        const options = select.querySelector('.form-select-options');
-        const text = select.querySelector('.form-select-text');
+        const triggerText = trigger.querySelector('.form-select-text');
+        const options = select.querySelectorAll('.form-select-option');
+        const optionsContainer = select.querySelector('.form-select-options');
         const hiddenInput = select.querySelector('input[type="hidden"]');
+        const placeholder = select.dataset.placeholder || "Choose"
         
+        const setValue = (value = "", text = placeholder) => {
+            triggerText.textContent = text
+            hiddenInput.value = value
+            select.classList.toggle('has-placeholder', !value)
+        };
+        
+        setValue()
+
         trigger.addEventListener('click', (e) => {
-            e.stopPropagation(); // prevent closing immediately
-            options.classList.toggle('show');
+            e.stopPropagation();
+            
+            document.querySelectorAll('.form-select-options.show')
+                .forEach(el => el !== optionsContainer && el.classList.remove('show'))
+            optionsContainer.classList.toggle('show');
         });
+
+        options.forEach(option =>
+            option.addEventListener('click', (e) => {
+                setValue(option.dataset.value, option.textContent.trim())
+                optionsContainer.classList.remove('show')
+            })
+        )
         
-        options.querySelectorAll('.form-select-option').forEach(option => {
-            option.addEventListener('click', () => {
-                const value = option.getAttribute('data-value');
-                const label = option.textContent;
-
-                hiddenInput.value = value;
-                text.textContent = label;
-                options.classList.remove('show');
-            });
-        });
-
-        // Close if clicked outside
-        document.addEventListener('click', () => {
-            options.classList.remove('show');
+        document.addEventListener('click', (e) => {
+            if (!select.contains(e.target)) {
+                optionsContainer.classList.remove('show');
+            }
         });
     });
 
-
-
+    
     // open modal
     const modalButtons = document.querySelectorAll('[data-type="modal"]')
     modalButtons.forEach(button => {

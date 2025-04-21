@@ -321,6 +321,7 @@ form .form-select .form-select-options .form-select-option {
   padding: 0.5rem 1rem;
   cursor: pointer;
   transition: background-color 0.1s ease-in-out;
+  list-style-type: none;
 }
 
 form .form-select .form-select-options .form-select-option:hover {
@@ -895,8 +896,23 @@ form {
 
 form .form-group {
   display: grid;
-  gap: 0.2rem;
-  margin-bottom: 1.2rem ;
+  gap: 0.3rem;
+  margin-bottom: 1rem ;
+}
+
+.form-horizontal-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1rem;
+}
+
+.form-horizontal-group .form-group {
+  flex: 1;
+}
+
+.form-horizontal-group .form-group:not(:last-child) {
+  margin-right: 1rem;
 }
 
 form .field-group {
