@@ -27,6 +27,7 @@
 
   /* Shades of Gray */
   --gray-100: #E8EAED;
+  --gray-100-opacity: rgba(232, 234, 237, 0.5);
   --gray-200: #EBEEF2;
   --gray-300: #E3E5E8;
   --gray-400: #E8E8E8;
@@ -47,12 +48,14 @@
   --dark-600: #38383B;
 
   --yellow: #FFD422;
-  --yellow-dark: #FCBB42;
+  --yellow-light: #fdf6bc;
+  --yellow-semilight: rgba(255, 243, 180, 0.5);
+  --yellow-dark: #805315;
   --orange: #FF9640;
   --orange-dark: #F09330;
   --red: #FF6640;
   --red-dark: #E94D3F;
-  --red-light: #FEF0EC;
+  --red-light: rgba(255, 234, 228, 0.5);
   --red-semilight: #FFAF99;
   --green: #31D482;
   --green-dark: #24B26B;
@@ -85,14 +88,18 @@
   --badge-red-border-color: var(--white-100);
   --badge-red-background-color: var(--red);
 
-  --badge-yellow-text-color: var(--dark-400);
-  --badge-yellow-border-color: var(--white-100);
-  --badge-yellow-background-color: var(--yellow);
+  --badge-danger-text-color: var(--red);
+  --badge-danger-border-color: var(--red-light);
+  --badge-danger-background-color: var(--red-light);
 
-  --badge-green-text-color: var(--white-100);
-  --badge-green-border-color: var(--white-100);
-  --badge-green-background-color: var(--green);
+  --badge-warning-text-color: var(--yellow-dark);
+  --badge-warning-border-color: var(--yellow-semilight);
+  --badge-warning-background-color: var(--yellow-semilight);
 
+  --badge-normal-text-color: var(--dark-400);
+  --badge-normal-border-color: var(--gray-100-opacity);
+  --badge-normal-background-color: var(--gray-100-opacity);
+  
   --btn-blue-text-color: var(--white-100);
   --btn-blue-border-color: var(--white-100);
   --btn-blue-text-hover-color: var(--white-100);
@@ -263,7 +270,11 @@ html, body {
   margin-top: 1rem;
 }
 
-form .form-group,
+form .form-group {
+  position: relative;
+  text-align: left;
+}
+
 form .form-check {
   text-align: left;
 }
@@ -353,6 +364,21 @@ form input.form-search-input[type="search"]:focus {
 form .form-search-input::placeholder {
   color: var(--form-input-placeholder-color);
   font-size: 0.9em;
+}
+
+.form-input-extended {
+  position: relative;
+}
+
+.form-input-extended i {
+  position: absolute;
+  z-index: 1;
+  left: 14px;
+  top: -29px;
+}
+
+.form-input-extended .form-input {
+  padding-left: 2rem;
 }
 
 .search-form {
@@ -531,6 +557,30 @@ a:hover {
   display: none;
 }
 
+.btn-action {
+  transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+  color: var(--btn-close-text-color);
+  border: 1px solid var(--btn-close-border-color);
+  background-color: var(--btn-close-background-color);
+  z-index: 999;
+  font-size: 1.4rem;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 16px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-action:hover {
+  background-color: var(--btn-close-background-hover-color);
+  border: 1px solid var(--btn-close-border-hover-color);
+  color: var(--btn-close-text-color);
+  text-decoration: none;
+}
+
 .dot {
   font-size: 0.5em;
   background-color: var(--dot-background-color);
@@ -561,12 +611,37 @@ a:hover {
   font-weight: 400;
   font-style: normal;
   font-family: var(--font-standard);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .badge.badge-red {
   background-color: var(--badge-red-background-color);
   border: 1px solid var(--badge-red-border-color);
   color: var(--badge-red-text-color);
+  padding: 0.5rem 1rem;
+}
+
+.badge.badge-normal {
+  background-color: var(--badge-normal-background-color);
+  border: 1px solid var(--badge-normal-border-color);
+  color: var(--badge-normal-text-color);
+  padding: 0.5rem 1rem;
+}
+
+.badge.badge-warning {
+  background-color: var(--badge-warning-background-color);
+  border: 1px solid var(--badge-warning-border-color);
+  color: var(--badge-warning-text-color);
+  padding: 0.5rem 1rem;
+}
+
+.badge.badge-danger {
+  background-color: var(--badge-danger-background-color);
+  border: 1px solid var(--badge-danger-border-color);
+  color: var(--badge-danger-text-color);
+  padding: 0.5rem 1rem;
 }
 
 .btn-blue {
@@ -704,7 +779,7 @@ a:hover {
 
 .client-list .client-info .client-name {
   grid-area: name;
-  font-weight: var(--font-bold)
+  font-weight: var(--font-bold);
 }
 
 .client-list .client-info .client-email {
@@ -905,6 +980,7 @@ form .form-group {
   justify-content: space-between;
   align-items: start;
   gap: 1rem;
+  position: relative;
 }
 
 .form-horizontal-group .form-group {
@@ -934,6 +1010,59 @@ form select {
   border: 1px solid var(--border-color);
   outline: none;
   transition: border-color ease-in-out .1s;
+}
+
+.wysiwyg textarea {
+  display: none;
+}
+
+.wysiwyg-editor {
+  z-index: 0;
+  width: 100%;
+  font-size: 1em;
+  position: relative;
+  font-weight: 400;
+  font-family: var(--font-standard);
+  color: var(--form-input-text-color);
+  border: none; !important;
+  background-color: var(--form-search-input-background-color);
+  transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+  outline: none;
+  border-radius: 16px;
+  min-height: 150px;
+}
+
+.ql-container.ql-snow {
+  border: 1px solid var(--transparent) !important;
+}
+
+.ql-editor {
+  border: 1px solid var(--form-input-border-color);
+  border-radius: 16px;
+}
+
+.ql-editor:focus {
+  border: 1px solid var(--form-input-border-focus-color);
+  border-radius: 16px;
+}
+
+.ql-editor.ql-blank::before {
+  color: var(--form-input-placeholder-color);
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.wysiwyg-toolbar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border: none !important;
+  border-top: 1px solid var(--form-input-border-color) !important;
+  border-color: var(--form-input-border-color);
+  color: var(--form-input-text-color);
+  background-color: var(--transparent);
 }
 
 form input:focus,
@@ -1018,7 +1147,7 @@ input[type="checkbox"]{
   border: 1px solid var(--card-border-color);
   background-color: var(--card-background-color);
   box-shadow: 0 4px 4px 3px rgba(196,196,196,0.1);
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 14px;
 }
 
@@ -1027,14 +1156,11 @@ input[type="checkbox"]{
   justify-content: space-between;
   align-items: center;
   background-color: transparent;
+  border-bottom: 1px solid var(--transparent);
 }
 
 .card .card-body {
-  /*margin: 0 2rem;*/
-}
-
-.card .card-footer {
-  margin-top: 2rem;
+  border-bottom: 1px solid var(--transparent);
 }
 
 .dropdown {
@@ -1048,6 +1174,85 @@ input[type="checkbox"]{
   box-shadow: 0 4px 4px 3px rgba(196,196,196,0.1);
   padding: 0.8rem;
   border-radius: 14px;
+}
+
+.project .dropdown {
+  box-shadow: 0 0 5px 2px rgba(137, 137, 137, 0.1);
+  width: 220px;
+}
+
+.project.card .card-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "img name action" "img client na";
+  align-items: center;
+  column-gap: 1rem;
+  position: relative;
+}
+
+.project.card .card-header .project-image {
+  grid-area: img;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.project.card .card-header .project-name {
+  grid-area: name;
+}
+
+.project.card .card-header .client-name {
+  grid-area: client;
+  color: var(--text-muted-color);
+  
+}
+
+.project.card .card-header .project-actions {
+  grid-area: action;
+}
+
+.project.card .card-header .project-image img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
+.project.card .card-body {
+  margin:0 0.2em;
+  min-height: 100px;
+}
+
+.project.card .card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+
+.project.card .card-footer .members {
+  display: flex;
+  gap:0.5rem;
+  align-items: center;
+}
+
+.project.card .card-footer .members .user-image {
+  grid-area: img;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.project.card .card-footer .members .user-image img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.project.card .card-footer .badge.time {
+  padding: 0.5rem 1rem;
 }
 
 .dropdown.dropdown-show {
@@ -1100,6 +1305,10 @@ input[type="checkbox"]{
   color: var(--navlink-text-hover-color);
 }
 
+.dropdown-actions .dropdown-action.remove {
+  color: var(--red);
+}
+
 .dropdown-options {
   display: grid;
   gap: 0.5rem;
@@ -1113,8 +1322,8 @@ input[type="checkbox"]{
   padding: 1rem 1.5rem;
 }
 
-#projects {
-  
+.project-actions-container {
+  position: relative;
 }
 
 #add-project-modal .card {
@@ -1277,6 +1486,17 @@ input[type="checkbox"]{
   height: 40px;
   border-radius: 50%;
   border: 2px solid var(--account-name-image-border-color);
+}
+
+#projects {
+  display: grid;
+  gap: 3rem;
+}
+
+#projects .project-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
 }
 
 

@@ -28,7 +28,7 @@ public class AddProjectFormData
     public DateTime? EndDate { get; set; }
     
     [DataType(DataType.Currency)]
-    [Display(Name = "Budget" , Prompt = "Enter budget if it is available")]
+    [Display(Name = "Budget" , Prompt = "   Enter budget if it is available")]
     public decimal? Budget { get; set; }
     
    

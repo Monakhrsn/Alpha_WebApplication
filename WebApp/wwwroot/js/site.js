@@ -1,8 +1,10 @@
-﻿
-const modals = document.querySelectorAll('[data-type="modal"]')
+﻿const modals = document.querySelectorAll('[data-type="modal"]')
 
 document.addEventListener("DOMContentLoaded", () => {
     const previewSize = 150
+    
+    let addProjectDescriptionQuill = null;
+    let addProjectDescriptionTextarea = null;
     
     // header dropdowns 
     const dropdowns = document.querySelectorAll('[data-type="dropdown"]');
@@ -71,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // open modal
     const modalButtons = document.querySelectorAll('[data-type="modal"]')
+    
     modalButtons.forEach(button => {
         button.addEventListener('click', () => {
             const modalTarget = button.getAttribute('data-target')
@@ -78,6 +81,23 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if(modal)
                 modal.style.display = 'flex';
+            
+            if (!addProjectDescriptionQuill) {
+                addProjectDescriptionTextarea = document.getElementById('add-project-description');
+                addProjectDescriptionQuill = new Quill('#add-project-description-wysiwyg-editor', {
+                    modules: {
+                        syntax: true,
+                        toolbar: '#add-project-description-wysiwyg-toolbar',
+                    },
+                    theme: 'snow',
+                    placeholder: 'Type something.. .'
+                })
+                
+                addProjectDescriptionQuill.on('text-change', function () {
+                    if (addProjectDescriptionTextarea)
+                        addProjectDescriptionTextarea.value = addProjectDescriptionQuill.root.innerHTML;
+                })
+            }
         })
     })
 
