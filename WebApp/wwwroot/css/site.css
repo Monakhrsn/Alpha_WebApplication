@@ -1326,8 +1326,15 @@ input[type="checkbox"]{
   position: relative;
 }
 
-#add-project-modal .card {
+#add-project-modal .card, 
+#edit-project-modal .card {
   width: 550px;
+  margin-bottom: 1rem;
+}
+
+#add-project-modal .btn,
+#edit-project-modal .btn {
+  margin-top: 2rem;
 }
 
 #clients {

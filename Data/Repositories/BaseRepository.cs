@@ -32,8 +32,15 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
-            return new RepositoryResult<bool> { Succeeded = false, StatusCode = 500, Error = e.Message };
+            var message = e.InnerException?.Message ?? e.Message;
+            Console.WriteLine("Save Error: " + message);
+
+            return new RepositoryResult<bool> 
+            { 
+                Succeeded = false, 
+                StatusCode = 500, 
+                Error = message 
+            };
         }
     }
     

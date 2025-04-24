@@ -1,5 +1,6 @@
 
 
+using System.Diagnostics;
 using Business.Interfaces;
 using Business.Models;
 using Data.Entities;
@@ -16,14 +17,15 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
 
     public async Task<ProjectResult> CreateProjectAsync(AddProjectFormData formData)
     {
-        if (formData == null)
+        var statusResult = await _statusService.GetStatusByIdAsync(1);
+
+        if (!statusResult.Succeeded || statusResult.Result == null)
             return new ProjectResult { Succeeded = false, StatusCode = 400, Error = "Not all required field are supplied."};
 
         var projectEntity = formData.MapTo<ProjectEntity>();
-        var statusResult = await _statusService.GetStatusByIdAsync(1);
         var status = statusResult.Result;
         
-        projectEntity.StatusId = status!.Id;
+        projectEntity.StatusId = status.Id;
         
         var result = await _projectRepository.AddAsync(projectEntity);
         

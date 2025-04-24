@@ -1,14 +1,14 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model WebApp.Models.AddProjectViewModel
+@model WebApp.Models.EditProjectViewModel
 
-<div id="add-project-modal" class="modal">
+<div id="edit-project-modal" class="modal">
     <div class="card">
         <div class="card-header">
-            <h3>Add Project</h3>
-            <button type="button" class="btn-close" data-close="true" data-type="modal" data-target="#add-project-modal" ></button>
+            <h3>Edit Project</h3>
+            <button type="button" class="btn-close" data-close="true" data-type="modal" data-target="#edit-project-modal" ></button>
         </div>
         
-        <form id="modal-form" class="card-body" novalidate method="post" enctype="multipart/form-data" asp-action="Add" data-type="modal" asp-controller="Projects">
+        <form id="modal-form" class="card-body" novalidate method="post" enctype="multipart/form-data" asp-action="Edit" data-type="modal" asp-controller="Projects">
             <div class="image-previewer square">
                 <img class="image-preview" src=""  alt=""/>
                 <input asp-for="Image" accept="image/*" class="hide">
@@ -34,11 +34,10 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="form-label" asp-for="Description"></label>
-                <input type="hidden" id="add-project-description" asp-for="Description"/>
-                <div id="add-project-description-wysiwyg-editor" class="wysiwyg-editor"></div>
-                <div id="add-project-description-wysiwyg-toolbar" class="wysiwyg-toolbar">
+            <div edit-project-description class="form-group">
+                <label class="form-label" asp-for="Description" ></label>
+                <div id="edit-project-description-wysiwyg-editor" class="wysiwyg-editor"></div>
+                <div id="edit-project-description-wysiwyg-toolbar" class="wysiwyg-toolbar">
                     <span class="ql-formats">
                       <button class="ql-bold"></button>
                       <button class="ql-italic"></button>
@@ -96,7 +95,21 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-submit btn-blue">Create</button>
+            <div class="form-group">
+                <label class="form-label" asp-for="StatusId"></label>
+                <div class="form-select" data-placeholder="Choose a status">
+                    <button type="button" class="form-select-trigger">
+                        <span class="form-select-text"></span>
+                    </button>
+                    <ul class="form-select-options">
+                        <li class="form-select-option" data-value="1">STARTED</li>
+                        <li class="form-select-option" data-value="2">COMPLETED</li>
+                    </ul>
+                    <input type="hidden" asp-for="StatusId" />
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-submit btn-blue">Save</button>
         </form>
     </div>
 </div>

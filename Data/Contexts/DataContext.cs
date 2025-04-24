@@ -12,4 +12,17 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
     
     public virtual DbSet<MemberAddressEntity> MemberAddresses { get; set; }
     
+    
+    //Chatgpt, To seed status. It is a hook provided by Entity Framework Core that allows
+    // you to configure your models before they’re turned into database tables — during
+    // the model creation phase.
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<StatusEntity>().HasData(
+            new StatusEntity { Id = 1, StatusName = "Active" }
+        );
+    }
+
 }

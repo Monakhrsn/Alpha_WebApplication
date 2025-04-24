@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     let addProjectDescriptionQuill = null;
     let addProjectDescriptionTextarea = null;
+    let editProjectDescriptionQuill = null;
+    let editProjectDescriptionTextarea = null;
     
     // header dropdowns 
     const dropdowns = document.querySelectorAll('[data-type="dropdown"]');
@@ -96,6 +98,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 addProjectDescriptionQuill.on('text-change', function () {
                     if (addProjectDescriptionTextarea)
                         addProjectDescriptionTextarea.value = addProjectDescriptionQuill.root.innerHTML;
+                })
+            }
+            
+            if (!editProjectDescriptionQuill) {
+                editProjectDescriptionTextarea = document.getElementById('edit-project-description');
+                editProjectDescriptionQuill = new Quill('#edit-project-description-wysiwyg-editor', {
+                    modules: {
+                        syntax: true,
+                        toolbar: '#edit-project-description-wysiwyg-toolbar',
+                    },
+                    theme: 'snow',
+                    placeholder: 'Type something.. .'
+                })
+
+                editProjectDescriptionQuill.on('text-change', function () {
+                    if (editProjectDescriptionTextarea)
+                        editProjectDescriptionTextarea.value = editProjectDescriptionQuill.root.innerHTML;
                 })
             }
         })
