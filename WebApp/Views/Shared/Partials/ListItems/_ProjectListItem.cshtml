@@ -1,17 +1,17 @@
 @model WebApp.Models.ProjectViewModel;
 
-<div class="project card" data-project-id="1">
+<div class="project card" data-project-id="@Model.Id">
             <div class="card-header">
                 <div class="project-image">
-                    <img src="/images/projects/project-image.svg" alt="template project"/>
+                    <img src="@Model.ProjectImage" alt="template project"/>
                 </div>
-                <h6 class="project-name">Website Redesign</h6>
-                <span class="client-name">GitLab Inc.</span>
+                <h6 class="project-name">@Model.ProjectName</h6>
+                <span class="client-name">@Model.ClientName</span>
                 <div class="project-actions-container">
-                    <button type="button" data-type="dropdown" data-target="#project-dropdown-1" class="btn-action">
+                    <button type="button" data-type="dropdown" data-target="#project-dropdown-@Model.Id" class="btn-action">
                         <i class="fa-solid fa-ellipsis"></i>
                     </button>
-                    <div id="project-dropdown-1" class="dropdown">
+                    <div id="project-dropdown-@Model.Id" class="dropdown">
                         <div class="dropdown-body">
                             <nav class="dropdown-actions">
                                 <button data-type="modal" data-target="#edit-project-modal" class="dropdown-action">
@@ -25,7 +25,7 @@
                             </nav>
                             <div class="divider"></div>
                             <nav class="dropdown-actions">
-                                <button class="dropdown-action remove" href="#">
+                                <button class="dropdown-action remove" href="@Url.Action("Delete", "Projects", Model.Id)">
                                     <i class="fa-solid fa-trash"></i>
                                     <span>Delete Project</span>
                                 </button>
@@ -35,12 +35,12 @@
                 </div>
             </div>
             <div class="card-body">
-                <p>It is necessary to develop a website in a corporate style.</p>
+                <p>@Html.Raw(Model.Description)</p>
             </div>
             <div class="card-footer">
                 <div class="badge badge-warning">
                     <i class="fa-solid fa-clock"></i>
-                    <span>1 week left</span>
+                    <span>@Model.TimeLeft</span>
                 </div>
                 <div class="members">
                     <div class="user-image">

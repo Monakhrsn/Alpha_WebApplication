@@ -1,10 +1,8 @@
-using System.Security.Claims;
 using Business.Interfaces;
 using Domain.Extensions;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WebApp.Models;
 
 namespace WebApp.Controllers;
@@ -17,15 +15,36 @@ public class ProjectsController(IProjectService projectService) : Controller
     public async Task<IActionResult> Index()
     {
          var result = await _projectService.GetProjectsAsync();
-         var viewModel = new ProjectsViewModel
+         var viewModel = new ProjectsViewModel()
          {
-             Projects = result.Result ?? new List<Project>(),
+             Projects = SetProjects(),
+                 
              AddProjectFormData = new AddProjectViewModel(),
              EditProjectFormData = new EditProjectViewModel()
          };
              
          return View(viewModel);
     }
+    
+    private IEnumerable<ProjectViewModel> SetProjects()
+    {
+        var projects = new List<ProjectViewModel>
+
+        {
+            new() {
+                Id = Guid.NewGuid().ToString(),
+                ProjectName = "Website Redesign",
+                ProjectImage = "/images/projects/project-image.svg",
+                ClientName = "GitLab Inc.",
+                Description = "<p>It is <strong>necessary</strong> to develop a website redesign in a corporate style.</p>",
+                TimeLeft = "1 week left",
+                Members = ["/images/avatars/avatar-template.svg"]
+            }
+        };
+
+        return projects;
+    }
+
     
     [HttpPost("add")]
      public async Task<IActionResult> Add(AddProjectViewModel model)
@@ -36,16 +55,6 @@ public class ProjectsController(IProjectService projectService) : Controller
          var addProjectFormData = model.MapTo<AddProjectFormData>();
          
          var result = await _projectService.CreateProjectAsync(addProjectFormData);
-         // //  Get the current user ID
-         // var userId = User?.Identity?.IsAuthenticated == true 
-         //     ? User.Claims.FirstOrDefault(c => c.Type == "sub" || c.Type.Contains("nameIdentifier"))?.Value 
-         //     : null;
-         //
-         // if (userId == null)
-         //     return BadRequest("User is not authenticated");
-
-         // Assign the user ID
-         // addProjectFormData.UserId = userId;
          
          if (!result.Succeeded)
          {
