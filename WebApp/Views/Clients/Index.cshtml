@@ -2,15 +2,42 @@
     ViewData["Title"] = "Clients";
 }
 
-<partial name="Partials/Sections/_AddClientForm"/>
-<partial name="Partials/Sections/_EditClientForm"/>
+@model WebApp.Models.ClientsViewModel
+
+@await Html.PartialAsync("Partials/Sections/_AddClientForm", Model.AddClientForm)
+@await Html.PartialAsync("Partials/Sections/_EditClientForm", Model.EditProjectFormData)
 
 <section id="clients">
     <header class="flex-between">
         <h1>@ViewData["Title"]</h1>
         <button type="button" data-type="modal" data-target="#add-client-modal" class="btn btn-add btn-blue">Add Client</button>
     </header>
-    <div class="surface">
-        <partial name="Partials/Sections/_ClientList" />
-    </div>
+    @if (Model.Clients.Any())
+    {
+        <div class="surface">
+            <div class="client-list">
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="client-check"><input type="checkbox"/></th>
+                        <th class="client-info">Client Name</th>
+                        <th class="client-location">Location</th>
+                        <th class="client-phone">Phone</th>
+                        <th class="client-date">Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var client in Model.Clients)
+                        {
+                            @await Html.PartialAsync("Partials/Sections/_ClientList", client)
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
 </section>
+
+
+    
+}

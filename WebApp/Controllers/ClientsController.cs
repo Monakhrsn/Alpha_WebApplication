@@ -3,6 +3,7 @@ using Business.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Models;
 
 namespace WebApp.Controllers;
 
@@ -18,9 +19,19 @@ public class ClientsController : Controller
    }
 
    [HttpGet]
-   public IActionResult Index()
+   public async Task<IActionResult> Index()
    {
-       return View();
+       var clientResult = await _clientService.GetClientsAsync();
+       
+       var viewModel = new ClientsViewModel()
+       {
+           Clients = clientResult.Result!,
+           EditProjectFormData = new EditClientForm(),
+           AddClientForm = new AddClientForm()
+           
+       };
+       
+       return View(viewModel);
    }
    
    [HttpPost]
