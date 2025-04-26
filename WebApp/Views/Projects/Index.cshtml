@@ -25,8 +25,7 @@
         {
             @foreach (var project in Model.Projects)
             {
-                var viewModel = project.MapTo<ProjectViewModel>(); 
-                @await Html.PartialAsync("Partials/ListItems/_ProjectListItem", viewModel)
+                @await Html.PartialAsync("Partials/ListItems/_ProjectListItem", project)
             }
         }
     </section>

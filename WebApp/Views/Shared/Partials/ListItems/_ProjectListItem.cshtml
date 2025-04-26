@@ -1,54 +1,54 @@
-@model WebApp.Models.ProjectViewModel;
+@model Domain.Models.Project;
 
 <div class="project card" data-project-id="@Model.Id">
-            <div class="card-header">
-                <div class="project-image">
-                    <img src="@Model.ProjectImage" alt="template project"/>
-                </div>
-                <h6 class="project-name">@Model.ProjectName</h6>
-                <span class="client-name">@Model.ClientName</span>
-                <div class="project-actions-container">
-                    <button type="button" data-type="dropdown" data-target="#project-dropdown-@Model.Id" class="btn-action">
-                        <i class="fa-solid fa-ellipsis"></i>
-                    </button>
-                    <div id="project-dropdown-@Model.Id" class="dropdown">
-                        <div class="dropdown-body">
-                            <nav class="dropdown-actions">
-                                <button data-type="modal" data-target="#edit-project-modal" class="dropdown-action">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                    <span>Edit</span>
-                                </button>
-                                <button class="dropdown-action" href="#">
-                                    <i class="fa-solid fa-user-plus"></i>
-                                    <span>Add Member</span>
-                                </button>
-                            </nav>
-                            <div class="divider"></div>
-                            <nav class="dropdown-actions">
-                                <button class="dropdown-action remove" href="@Url.Action("Delete", "Projects", Model.Id)">
-                                    <i class="fa-solid fa-trash"></i>
-                                    <span>Delete Project</span>
-                                </button>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <p>@Html.Raw(Model.Description)</p>
-            </div>
-            <div class="card-footer">
-                <div class="badge badge-warning">
-                    <i class="fa-solid fa-clock"></i>
-                    <span>@Model.TimeLeft</span>
-                </div>
-                <div class="members">
-                    <div class="user-image">
-                        <img src="/images/avatars/avatar-template.svg" alt="template avatar">
-                    </div>
-                    <div class="user-image">
-                        <img src="/images/avatars/avatar-template.svg" alt="template avatar">
-                    </div>
+    <div class="card-header">
+        <div class="project-image">
+            <img src="@Model.Image" alt="template project"/>
+        </div>
+        <h6 class="project-name">@Model.ProjectName</h6>
+        <span class="client-name">@Model.Client!.Name</span>
+        <div class="project-actions-container">
+            <button type="button" data-type="dropdown" data-target="#project-dropdown-@Model.Id" class="btn-action">
+                <i class="fa-solid fa-ellipsis"></i>
+            </button>
+            <div id="project-dropdown-@Model.Id" class="dropdown">
+                <div class="dropdown-body">
+                    <nav class="dropdown-actions">
+                        <button data-type="modal" data-target="#edit-project-modal" class="dropdown-action">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <span>Edit</span>
+                        </button>
+                        <button class="dropdown-action" href="#">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>Add Member</span>
+                        </button>
+                    </nav>
+                    <div class="divider"></div>
+                    <nav class="dropdown-actions">
+                        <button class="dropdown-action remove" href="@Url.Action("Delete", "Projects", Model.Id)">
+                            <i class="fa-solid fa-trash"></i>
+                            <span>Delete Project</span>
+                        </button>
+                    </nav>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="card-body">
+        <p>@Html.Raw(Model.Description)</p>
+    </div>
+    <div class="card-footer">
+        <div class="badge badge-warning">
+            <i class="fa-solid fa-clock"></i>
+            <span>@Model.StartDate</span>
+        </div>
+        <div class="members">
+            <div class="user-image">
+                <img src="/images/avatars/avatar-template.svg" alt="template avatar">
+            </div>
+            <div class="user-image">
+                <img src="/images/avatars/avatar-template.svg" alt="template avatar">
+            </div>
+        </div>
+    </div>
+</div>

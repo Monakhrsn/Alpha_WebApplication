@@ -22,7 +22,7 @@ public class ProjectsController(IProjectService projectService, IClientService c
          ViewBag.Clients = clientResult.Result; 
          var viewModel = new ProjectsViewModel()
          {
-             Projects = SetProjects(),
+             Projects = result.Result!,
                  
              AddProjectFormData = new AddProjectViewModel(),
              EditProjectFormData = new EditProjectViewModel(),
@@ -62,24 +62,5 @@ public class ProjectsController(IProjectService projectService, IClientService c
     public IActionResult Delete(string id)
     {
         return Json(new {});
-    }
-    
-    private IEnumerable<ProjectViewModel> SetProjects()
-    {
-        var projects = new List<ProjectViewModel>
-
-        {
-            new() {
-                Id = Guid.NewGuid().ToString(),
-                ProjectName = "Website Redesign",
-                ProjectImage = "/images/projects/project-image.svg",
-                ClientName = "GitLab Inc.",
-                Description = "<p>It is <strong>necessary</strong> to develop a website redesign in a corporate style.</p>",
-                TimeLeft = "1 week left",
-                Members = ["/images/avatars/avatar-template.svg"]
-            }
-        };
-
-        return projects;
     }
 }

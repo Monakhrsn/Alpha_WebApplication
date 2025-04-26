@@ -36,8 +36,9 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
     
     public async Task<ProjectResult<IEnumerable<Project>>> GetProjectsAsync()
     {
-        var response = await _projectRepository.GetAllAsync
+        var response = await _projectRepository.GetAllAsync<ProjectEntity>
             (
+                selector: s => s,
               orderByDescending: true, 
               sortBy: s => s.Created, 
               where: null,
@@ -45,8 +46,17 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
               include => include.Status,
               include => include.Client
             );
+        var result = response.Result!.Select(p =>
+        {
+            var target = p.MapTo<Project>();
+
+            target.Client = p.Client.MapTo<Client>();
+            target.Status = p.Status.MapTo<Status>();
+            target.User = p.Client.MapTo<User>();
+            return target;
+        });
         
-        return new ProjectResult<IEnumerable<Project>>{ Succeeded = true, StatusCode = 200, Result = response.Result };
+        return new ProjectResult<IEnumerable<Project>>{ Succeeded = true, StatusCode = 200, Result = result };
     }
     
     public async Task<ProjectResult<Project>> GetProjectAsync(string id)
