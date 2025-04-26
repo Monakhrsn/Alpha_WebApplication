@@ -1,3 +1,4 @@
+@using Domain.Models
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model WebApp.Models.AddProjectViewModel
 
@@ -27,8 +28,12 @@
                         <span class="form-select-text"></span>
                     </button>
                     <ul class="form-select-options">
-                        <li class="form-select-option" data-value="1">Client 1</li>
-                        <li class="form-select-option" data-value="2">Client 2</li>
+                        @foreach (var client in (IEnumerable<Client>)ViewBag.Clients)
+                        {
+                            <li class="form-select-option" data-value="@client.Id">
+                                @client.Name
+                            </li>
+                        }
                     </ul>
                     <input type="hidden" asp-for="ClientId" />
                 </div>

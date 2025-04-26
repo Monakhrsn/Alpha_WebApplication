@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Business.Interfaces;
 using Domain.Extensions;
 using Domain.Models;
@@ -9,42 +10,26 @@ namespace WebApp.Controllers;
 
 [Authorize]
 [Route("admin/[controller]")]
-public class ProjectsController(IProjectService projectService) : Controller
+public class ProjectsController(IProjectService projectService, IClientService clientService) : Controller
 {
     private readonly IProjectService _projectService = projectService;
+    private readonly IClientService _clientService = clientService;
+
     public async Task<IActionResult> Index()
     {
          var result = await _projectService.GetProjectsAsync();
+         var clientResult = await _clientService.GetClientsAsync();
+         ViewBag.Clients = clientResult.Result; 
          var viewModel = new ProjectsViewModel()
          {
              Projects = SetProjects(),
                  
              AddProjectFormData = new AddProjectViewModel(),
-             EditProjectFormData = new EditProjectViewModel()
+             EditProjectFormData = new EditProjectViewModel(),
          };
              
          return View(viewModel);
     }
-    
-    private IEnumerable<ProjectViewModel> SetProjects()
-    {
-        var projects = new List<ProjectViewModel>
-
-        {
-            new() {
-                Id = Guid.NewGuid().ToString(),
-                ProjectName = "Website Redesign",
-                ProjectImage = "/images/projects/project-image.svg",
-                ClientName = "GitLab Inc.",
-                Description = "<p>It is <strong>necessary</strong> to develop a website redesign in a corporate style.</p>",
-                TimeLeft = "1 week left",
-                Members = ["/images/avatars/avatar-template.svg"]
-            }
-        };
-
-        return projects;
-    }
-
     
     [HttpPost("add")]
      public async Task<IActionResult> Add(AddProjectViewModel model)
@@ -53,6 +38,7 @@ public class ProjectsController(IProjectService projectService) : Controller
              return BadRequest(new { error = "Invalid project data submitted." });
          
          var addProjectFormData = model.MapTo<AddProjectFormData>();
+         addProjectFormData.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
          
          var result = await _projectService.CreateProjectAsync(addProjectFormData);
          
@@ -76,5 +62,24 @@ public class ProjectsController(IProjectService projectService) : Controller
     public IActionResult Delete(string id)
     {
         return Json(new {});
+    }
+    
+    private IEnumerable<ProjectViewModel> SetProjects()
+    {
+        var projects = new List<ProjectViewModel>
+
+        {
+            new() {
+                Id = Guid.NewGuid().ToString(),
+                ProjectName = "Website Redesign",
+                ProjectImage = "/images/projects/project-image.svg",
+                ClientName = "GitLab Inc.",
+                Description = "<p>It is <strong>necessary</strong> to develop a website redesign in a corporate style.</p>",
+                TimeLeft = "1 week left",
+                Members = ["/images/avatars/avatar-template.svg"]
+            }
+        };
+
+        return projects;
     }
 }
