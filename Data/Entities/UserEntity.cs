@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 
 namespace Data.Entities;
-
+// it seems that it is memberEntity
 public class UserEntity : IdentityUser
 {
     [ProtectedPersonalData]

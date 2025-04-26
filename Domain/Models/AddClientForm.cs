@@ -15,7 +15,7 @@ public class AddClientForm
     [DataType(DataType.Text)]
     [Display(Name = "Client Name" , Prompt = "Enter client name")]
     [Required(ErrorMessage = "Required")]
-    public string ClientName { get; set; } = null!;
+    public string Name { get; set; } = null!;
     
     [Display(Name = "Email Address" , Prompt = "Enter email")]
     [DataType(DataType.EmailAddress)]
