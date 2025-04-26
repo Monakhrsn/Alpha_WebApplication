@@ -1,3 +1,5 @@
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 <div id="account-container">
     <button type="button" data-type="dropdown" data-target="#account-dropdown" class="btn-account">
         <img src="/images/avatars/woman-long.svg" alt="template-avatar" />
@@ -6,7 +8,7 @@
         <div class="dropdown-header">
             <div class="account-name">
                 <img src="/images/avatars/woman-long.svg" alt="template-avatar" />
-                <span>Sarah Caner</span>
+                <span>@User.Identity.Name</span>
             </div>
         </div>
         <div class="dropdown-body">
