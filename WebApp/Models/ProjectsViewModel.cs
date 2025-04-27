@@ -8,4 +8,7 @@ public class ProjectsViewModel
 
     public AddProjectViewModel AddProjectFormData { get; set; } = new();
     public EditProjectViewModel EditProjectFormData { get; set; } = new();
+    public int AllProjectCount { get; set; }
+    public int CompletedProjectCount { get; set; }
+    public int StartedProjectCount { get; set; }
 }

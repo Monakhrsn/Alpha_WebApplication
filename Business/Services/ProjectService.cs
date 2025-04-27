@@ -1,6 +1,3 @@
-
-
-using System.Diagnostics;
 using System.Linq.Expressions;
 using Business.Interfaces;
 using Business.Models;
@@ -66,9 +63,9 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
         var today = DateTime.UtcNow.Date;
 
         if (isCompleted)
-            whereClause = x => x.EndDate != null && x.EndDate < today;
+            whereClause = p => p.EndDate != null && p.EndDate <= today;
         else
-            whereClause = x => x.EndDate == null || x.EndDate >= today;
+            whereClause = p => p.EndDate == null || p.EndDate > today;
         
         var response = await _projectRepository.GetAllAsync<ProjectEntity>
         (
@@ -91,6 +88,25 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
         });
         
         return new ProjectResult<IEnumerable<Project>>{ Succeeded = true, StatusCode = 200, Result = result };
+    }
+
+    public async Task<ProjectResult<int>> GetProjectsCountAsync()
+    {
+        
+        var result = await _projectRepository.GetCountAsync();
+        
+        return result.Succeeded
+            ? new ProjectResult<int> { Succeeded = true, StatusCode = 201, Result = result.Result}
+            : new ProjectResult<int> { Succeeded = false, StatusCode = result.StatusCode, Error = result.Error };
+    }
+
+    public async Task<ProjectResult<int>> GetProjectsCountAsync(bool isCompleted)
+    {
+        var result = await _projectRepository.GetCountAsync(isCompleted);
+        
+        return result.Succeeded
+            ? new ProjectResult<int> { Succeeded = true, StatusCode = 201, Result = result.Result}
+            : new ProjectResult<int> { Succeeded = false, StatusCode = result.StatusCode, Error = result.Error };
     }
 
     public async Task<ProjectResult<Project>> GetProjectAsync(string id)

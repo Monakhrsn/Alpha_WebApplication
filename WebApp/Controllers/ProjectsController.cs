@@ -27,13 +27,21 @@ public class ProjectsController(IProjectService projectService, IClientService c
             result = await _projectService.GetProjectsAsync();
         
         var clientResult = await _clientService.GetClientsAsync();
-        ViewBag.Clients = clientResult.Result; 
+        ViewBag.Clients = clientResult.Result;
+
+        var projectCount = await _projectService.GetProjectsCountAsync();
+        var completedProjectCount = await _projectService.GetProjectsCountAsync(true);
+        var startedProjectCount = await _projectService.GetProjectsCountAsync(false);
+        
         var viewModel = new ProjectsViewModel()
         {
          Projects = result.Result!,
              
          AddProjectFormData = new AddProjectViewModel(),
          EditProjectFormData = new EditProjectViewModel(),
+         AllProjectCount = projectCount.Result!,
+         CompletedProjectCount = completedProjectCount.Result!,
+         StartedProjectCount = startedProjectCount.Result!,
         };
          
         return View(viewModel);

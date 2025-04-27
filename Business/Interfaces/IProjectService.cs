@@ -9,4 +9,6 @@ public interface IProjectService
     Task<ProjectResult<Project>> GetProjectAsync(string id);
     Task<ProjectResult<IEnumerable<Project>>> GetProjectsAsync();
     Task<ProjectResult<IEnumerable<Project>>> GetProjectsAsync(bool isCompleted);
+    Task<ProjectResult<int>> GetProjectsCountAsync();
+    Task<ProjectResult<int>> GetProjectsCountAsync(bool isCompleted);
 }
