@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using Business.Interfaces;
+using Business.Models;
 using Domain.Extensions;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -15,20 +16,27 @@ public class ProjectsController(IProjectService projectService, IClientService c
     private readonly IProjectService _projectService = projectService;
     private readonly IClientService _clientService = clientService;
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index([FromQuery] string status = "all")
     {
-         var result = await _projectService.GetProjectsAsync();
-         var clientResult = await _clientService.GetClientsAsync();
-         ViewBag.Clients = clientResult.Result; 
-         var viewModel = new ProjectsViewModel()
-         {
-             Projects = result.Result!,
-                 
-             AddProjectFormData = new AddProjectViewModel(),
-             EditProjectFormData = new EditProjectViewModel(),
-         };
+        ProjectResult<IEnumerable<Project>>? result;
+        if(status.ToLower().Equals("completed") )
+            result = await _projectService.GetProjectsAsync(true);
+        else if (status.ToLower().Equals("started"))
+            result = await _projectService.GetProjectsAsync(false);
+        else
+            result = await _projectService.GetProjectsAsync();
+        
+        var clientResult = await _clientService.GetClientsAsync();
+        ViewBag.Clients = clientResult.Result; 
+        var viewModel = new ProjectsViewModel()
+        {
+         Projects = result.Result!,
              
-         return View(viewModel);
+         AddProjectFormData = new AddProjectViewModel(),
+         EditProjectFormData = new EditProjectViewModel(),
+        };
+         
+        return View(viewModel);
     }
     
     [HttpPost("add")]

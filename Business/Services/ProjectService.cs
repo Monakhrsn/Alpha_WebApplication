@@ -1,6 +1,7 @@
 
 
 using System.Diagnostics;
+using System.Linq.Expressions;
 using Business.Interfaces;
 using Business.Models;
 using Data.Entities;
@@ -58,7 +59,40 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
         
         return new ProjectResult<IEnumerable<Project>>{ Succeeded = true, StatusCode = 200, Result = result };
     }
-    
+
+    public async Task<ProjectResult<IEnumerable<Project>>> GetProjectsAsync(bool isCompleted)
+    {
+        Expression<Func<ProjectEntity, bool>> whereClause;
+        var today = DateTime.UtcNow.Date;
+
+        if (isCompleted)
+            whereClause = x => x.EndDate != null && x.EndDate < today;
+        else
+            whereClause = x => x.EndDate == null || x.EndDate >= today;
+        
+        var response = await _projectRepository.GetAllAsync<ProjectEntity>
+        (
+            selector: s => s,
+            orderByDescending: true, 
+            sortBy: s => s.Created, 
+            where: whereClause,
+            include => include.User,
+            include => include.Status,
+            include => include.Client
+        );
+        var result = response.Result!.Select(p =>
+        {
+            var target = p.MapTo<Project>();
+
+            target.Client = p.Client.MapTo<Client>();
+            target.Status = p.Status.MapTo<Status>();
+            target.User = p.Client.MapTo<User>();
+            return target;
+        });
+        
+        return new ProjectResult<IEnumerable<Project>>{ Succeeded = true, StatusCode = 200, Result = result };
+    }
+
     public async Task<ProjectResult<Project>> GetProjectAsync(string id)
     {
         var response = await _projectRepository.GetAsync

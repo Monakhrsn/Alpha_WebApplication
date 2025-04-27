@@ -5,6 +5,19 @@
 
 @{
     ViewData["Title"] = "Projects";
+    
+    var isCompleted = (ViewContext.RouteData.Values["controller"]?.ToString() == "Projects"
+                    && ViewContext.RouteData.Values["action"]?.ToString() == "Index"
+                    && ViewContext.HttpContext.Request.Query["status"] == "completed");
+    
+    var isStarted = (ViewContext.RouteData.Values["controller"]?.ToString() == "Projects"
+                    && ViewContext.RouteData.Values["action"]?.ToString() == "Index"
+                    && ViewContext.HttpContext.Request.Query["status"] == "started");
+
+    var isAll = (ViewContext.RouteData.Values["controller"]?.ToString() == "Projects"
+                 && ViewContext.RouteData.Values["action"]?.ToString() == "Index"
+                 && ViewContext.HttpContext.Request.Query["status"] != "completed"
+                 && ViewContext.HttpContext.Request.Query["status"] != "started");
 }
 
 <section id="projects" class="page">
@@ -19,6 +32,28 @@
             Add Project
         </button>
     </header>
+    
+    <section>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link @(isAll ? "active" : "")" 
+                   asp-controller="Projects" 
+                   asp-action="Index">All</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(isCompleted ? "active" : "")"
+                    asp-controller="Projects"
+                    asp-action="Index"
+                    asp-route-status="completed">Competed</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(isStarted ? "active" : "")"
+                    asp-controller="Projects"
+                    asp-action="Index"
+                    asp-route-status="started">Started</a>
+            </li>
+        </ul>
+    </section>
     
     <section class="project-list">
         @if (Model.Projects.Any())
