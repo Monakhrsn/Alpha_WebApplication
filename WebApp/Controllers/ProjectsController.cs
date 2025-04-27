@@ -18,20 +18,22 @@ public class ProjectsController(IProjectService projectService, IClientService c
 
     public async Task<IActionResult> Index([FromQuery] string status = "all")
     {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+        
         ProjectResult<IEnumerable<Project>>? result;
         if(status.ToLower().Equals("completed") )
-            result = await _projectService.GetProjectsAsync(true);
+            result = await _projectService.GetProjectsAsync(userId, true);
         else if (status.ToLower().Equals("started"))
-            result = await _projectService.GetProjectsAsync(false);
+            result = await _projectService.GetProjectsAsync(userId, false);
         else
-            result = await _projectService.GetProjectsAsync();
+            result = await _projectService.GetProjectsAsync(userId);
         
         var clientResult = await _clientService.GetClientsAsync();
         ViewBag.Clients = clientResult.Result;
 
-        var projectCount = await _projectService.GetProjectsCountAsync();
-        var completedProjectCount = await _projectService.GetProjectsCountAsync(true);
-        var startedProjectCount = await _projectService.GetProjectsCountAsync(false);
+        var projectCount = await _projectService.GetProjectsCountAsync(userId);
+        var completedProjectCount = await _projectService.GetProjectsCountAsync(userId, true);
+        var startedProjectCount = await _projectService.GetProjectsCountAsync(userId, false);
         
         var viewModel = new ProjectsViewModel()
         {

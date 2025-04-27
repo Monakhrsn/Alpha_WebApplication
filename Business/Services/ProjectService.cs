@@ -32,14 +32,15 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
             : new ProjectResult { Succeeded = false, StatusCode = result.StatusCode, Error = result.Error };
     }
     
-    public async Task<ProjectResult<IEnumerable<Project>>> GetProjectsAsync()
+    public async Task<ProjectResult<IEnumerable<Project>>> GetProjectsAsync(string userId)
     {
+        
         var response = await _projectRepository.GetAllAsync<ProjectEntity>
             (
                 selector: s => s,
               orderByDescending: true, 
               sortBy: s => s.Created, 
-              where: null,
+              where: s => s.UserId == userId,
               include => include.User,
               include => include.Status,
               include => include.Client
@@ -57,15 +58,15 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
         return new ProjectResult<IEnumerable<Project>>{ Succeeded = true, StatusCode = 200, Result = result };
     }
 
-    public async Task<ProjectResult<IEnumerable<Project>>> GetProjectsAsync(bool isCompleted)
+    public async Task<ProjectResult<IEnumerable<Project>>> GetProjectsAsync(string userId, bool isCompleted)
     {
         Expression<Func<ProjectEntity, bool>> whereClause;
         var today = DateTime.UtcNow.Date;
 
         if (isCompleted)
-            whereClause = p => p.EndDate != null && p.EndDate <= today;
+            whereClause = p => p.EndDate != null && p.EndDate <= today && userId == p.UserId;
         else
-            whereClause = p => p.EndDate == null || p.EndDate > today;
+            whereClause = p => (p.EndDate == null || p.EndDate > today) && userId == p.UserId;
         
         var response = await _projectRepository.GetAllAsync<ProjectEntity>
         (
@@ -90,37 +91,22 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
         return new ProjectResult<IEnumerable<Project>>{ Succeeded = true, StatusCode = 200, Result = result };
     }
 
-    public async Task<ProjectResult<int>> GetProjectsCountAsync()
+    public async Task<ProjectResult<int>> GetProjectsCountAsync(string userId)
     {
         
-        var result = await _projectRepository.GetCountAsync();
-        
-        return result.Succeeded
-            ? new ProjectResult<int> { Succeeded = true, StatusCode = 201, Result = result.Result}
-            : new ProjectResult<int> { Succeeded = false, StatusCode = result.StatusCode, Error = result.Error };
-    }
-
-    public async Task<ProjectResult<int>> GetProjectsCountAsync(bool isCompleted)
-    {
-        var result = await _projectRepository.GetCountAsync(isCompleted);
+        var result = await _projectRepository.GetCountAsync(userId);
         
         return result.Succeeded
             ? new ProjectResult<int> { Succeeded = true, StatusCode = 201, Result = result.Result}
             : new ProjectResult<int> { Succeeded = false, StatusCode = result.StatusCode, Error = result.Error };
     }
 
-    public async Task<ProjectResult<Project>> GetProjectAsync(string id)
+    public async Task<ProjectResult<int>> GetProjectsCountAsync(string userId, bool isCompleted)
     {
-        var response = await _projectRepository.GetAsync
-        (
-            where: x => x.Id == id,
-            include => include.User,
-            include => include.Status,
-            include => include.Client
-        );
-
-        return response.Succeeded
-            ? new ProjectResult<Project> { Succeeded = true, StatusCode = 200, Result = response.Result }
-            : new ProjectResult<Project> { Succeeded = false, StatusCode = 404, Error = $"Project '{id}' was not found." };
+        var result = await _projectRepository.GetCountAsync(userId, isCompleted);
+        
+        return result.Succeeded
+            ? new ProjectResult<int> { Succeeded = true, StatusCode = 201, Result = result.Result}
+            : new ProjectResult<int> { Succeeded = false, StatusCode = result.StatusCode, Error = result.Error };
     }
 }

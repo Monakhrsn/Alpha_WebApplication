@@ -7,6 +7,6 @@ namespace Data.Interfaces;
 
 public interface IProjectRepository : IBaseRepository<ProjectEntity, Project>
 {
-    public Task<RepositoryResult<int>> GetCountAsync();
-    public Task<RepositoryResult<int>> GetCountAsync(bool isCompleted);
+    public Task<RepositoryResult<int>> GetCountAsync(string userId);
+    public Task<RepositoryResult<int>> GetCountAsync(string userId, bool isCompleted);
 }
