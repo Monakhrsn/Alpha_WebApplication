@@ -3,10 +3,12 @@
 <div class="project card" data-project-id="@Model.Id">
     <div class="card-header">
         <div class="project-image">
-            <img src="@Model.Image" alt="template project"/>
+            <img src="@(string.IsNullOrEmpty(Model.Image) ? "/images/projects/project-image.svg" : Model.Image)" alt="template project"/>
         </div>
-        <h6 class="project-name">@Model.ProjectName</h6>
-        <span class="client-name">@Model.Client!.Name</span>
+        <div>
+            <h6 class="project-name">@Model.ProjectName</h6>
+            <span class="client-name">@Model.Client!.Name</span>
+        </div>
         <div class="project-actions-container">
             <button type="button" data-type="dropdown" data-target="#project-dropdown-@Model.Id" class="btn-action">
                 <i class="fa-solid fa-ellipsis"></i>

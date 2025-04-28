@@ -1191,11 +1191,11 @@ input[type="checkbox"]{
 }
 
 .project.card .card-header .project-image {
-  grid-area: img;
   width: 56px;
   height: 56px;
   overflow: hidden;
   border-radius: 16px;
+  grid-area: img;
 }
 
 .project.card .card-header .project-name {
@@ -1213,8 +1213,8 @@ input[type="checkbox"]{
 }
 
 .project.card .card-header .project-image img {
-  width: 56px;
-  height: 56px;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
