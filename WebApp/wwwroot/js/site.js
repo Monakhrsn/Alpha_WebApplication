@@ -71,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
     
     // open modal
     const modalButtons = document.querySelectorAll('[data-type="modal"]')
@@ -83,23 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if(modal)
                 modal.style.display = 'flex';
-            
-            if (!addProjectDescriptionQuill) {
-                addProjectDescriptionTextarea = document.getElementById('add-project-description');
-                addProjectDescriptionQuill = new Quill('#add-project-description-wysiwyg-editor', {
-                    modules: {
-                        syntax: true,
-                        toolbar: '#add-project-description-wysiwyg-toolbar',
-                    },
-                    theme: 'snow',
-                    placeholder: 'Type something.. .'
-                })
-                
-                addProjectDescriptionQuill.on('text-change', function () {
-                    if (addProjectDescriptionTextarea)
-                        addProjectDescriptionTextarea.value = addProjectDescriptionQuill.root.innerHTML;
-                })
-            }
             
             if (!editProjectDescriptionQuill) {
                 editProjectDescriptionTextarea = document.getElementById('edit-project-description');
@@ -115,6 +97,58 @@ document.addEventListener("DOMContentLoaded", () => {
                 editProjectDescriptionQuill.on('text-change', function () {
                     if (editProjectDescriptionTextarea)
                         editProjectDescriptionTextarea.value = editProjectDescriptionQuill.root.innerHTML;
+                })
+            }
+            
+            if (button.classList.contains('btn-edit-project')) {
+                modal.querySelector('input[name="ProjectName"]').value = button.dataset.projectname || '';
+                modal.querySelector('input[name="ClientId"]').value = button.dataset.clientid || '';
+                modal.querySelector('input[name="StartDate"]').value = button.dataset.startdate || '';
+                modal.querySelector('input[name="EndDate"]').value = button.dataset.enddate || '';
+                modal.querySelector('input[name="Budget"]').value = button.dataset.budget || '';
+                modal.querySelector('input[name="Id"]').value = button.dataset.id || '';
+                
+                const imagePreview = modal.querySelector('.image-preview');
+                if (imagePreview && button.dataset.image) {
+                    imagePreview.src = button.dataset.image;
+                }
+                
+                // Set Client Select visible text
+                const clientInput = modal.querySelector('input[name="ClientId"]');
+                if (clientInput) {
+                    const clientSelect = clientInput.closest('.form-select');
+                    const triggerText = clientSelect.querySelector('.form-select-text');
+                    const selectedOption = clientSelect.querySelector(`.form-select-option[data-value="${button.dataset.clientid}"]`);
+
+                    if (selectedOption) {
+                        triggerText.textContent = selectedOption.textContent.trim();
+                        clientInput.value = selectedOption.dataset.value;
+                    }
+                }
+
+
+                if (editProjectDescriptionQuill) {
+                    editProjectDescriptionQuill.root.innerHTML = button.dataset.description || '';
+                    if (editProjectDescriptionTextarea) {
+                        editProjectDescriptionTextarea.value = button.dataset.description || '';
+                    }
+                }
+            }
+            
+            if (!addProjectDescriptionQuill) {
+                addProjectDescriptionTextarea = document.getElementById('add-project-description');
+                addProjectDescriptionQuill = new Quill('#add-project-description-wysiwyg-editor', {
+                    modules: {
+                        syntax: true,
+                        toolbar: '#add-project-description-wysiwyg-toolbar',
+                    },
+                    theme: 'snow',
+                    placeholder: 'Type something.. .'
+                })
+                
+                addProjectDescriptionQuill.on('text-change', function () {
+                    if (addProjectDescriptionTextarea)
+                        addProjectDescriptionTextarea.value = addProjectDescriptionQuill.root.innerHTML;
                 })
             }
         })

@@ -4,9 +4,10 @@ namespace WebApp.Models;
 
 public class EditProjectViewModel
 {
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+    
     [DataType(DataType.Upload)]
     [Display(Name = "Project Image")]
-
     public IFormFile? Image { get; set; }
     
     [DataType(DataType.Text)]
@@ -22,7 +23,7 @@ public class EditProjectViewModel
     
     [DataType(DataType.Text)]
     [Display(Name = "Description")]
-    public string Description { get; set; } = null!;
+    public string? Description { get; set; }
     
     [DataType(DataType.Date)]
     [Display(Name = "Start date")]

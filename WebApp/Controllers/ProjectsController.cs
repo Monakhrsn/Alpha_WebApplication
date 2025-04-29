@@ -16,6 +16,10 @@ public class ProjectsController(IProjectService projectService, IClientService c
     private readonly IProjectService _projectService = projectService;
     private readonly IClientService _clientService = clientService;
 
+    
+    // Communicated with chatgpt: This Index which is an asynchronous controller action method builds up all the data needed for a "Projects" page
+    // It accepts an optional query string parameter status, which defaults to "all" if not provided,  
+    // and returns an IActionResult, which usually means it will render a View or return a result (like a redirect, JSON, etc.).
     public async Task<IActionResult> Index([FromQuery] string status = "all")
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
@@ -69,11 +73,24 @@ public class ProjectsController(IProjectService projectService, IClientService c
 
          return Json(new { message = "Project created successfully." });
      }
-     
+
     [HttpPost("update")]
-    public IActionResult Update(int model)
+    public async Task<IActionResult> Update(EditProjectViewModel model)
     {
-        return Json(new {});
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(new { error = "Invalid project data submitted." });
+        }
+
+        var updateData = model.MapTo<EditProjectFormData>();
+        var result = await _projectService.UpdateProjectAsync(updateData);
+
+        if (!result.Succeeded)
+        {
+            Console.WriteLine($"[UPDATE ERROR] {result.Error}");
+            return BadRequest(new { error = result.Error });
+        }
+        return Json(new { message = "Project updated successfully." });
     }
      
     [HttpPost("delete")]

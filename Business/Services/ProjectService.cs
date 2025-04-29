@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using Business.Interfaces;
 using Business.Models;
 using Data.Entities;
@@ -24,7 +25,7 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
         var status = statusResult.Result;
         
         projectEntity.StatusId = status.Id;
-        
+       
         var result = await _projectRepository.AddAsync(projectEntity);
         
         return result.Succeeded
@@ -108,5 +109,51 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
         return result.Succeeded
             ? new ProjectResult<int> { Succeeded = true, StatusCode = 201, Result = result.Result}
             : new ProjectResult<int> { Succeeded = false, StatusCode = result.StatusCode, Error = result.Error };
+    }
+
+    public async Task<ProjectResult> UpdateProjectAsync(EditProjectFormData formData)
+    {
+        var projectEntityResult = await _projectRepository.GetByIdAsync(formData.Id);
+
+        if (!projectEntityResult.Succeeded)
+        {
+            return new ProjectResult { Succeeded = false, StatusCode = 404, Error = "Project not found." };
+        }
+        
+        var projectEntity = projectEntityResult.Result;
+
+        if (projectEntity != null)
+        {
+            projectEntity.ProjectName = formData.ProjectName;
+            projectEntity.Description = formData.Description;
+            projectEntity.StartDate = formData.StartDate;
+            projectEntity.EndDate = formData.EndDate;
+            projectEntity.Budget = formData.Budget;
+            projectEntity.ClientId = formData.ClientId;
+
+            if (formData.Image != null)
+            {
+                var fileName = $"{Guid.NewGuid()}_{formData.Image.FileName}";
+                var filePath = Path.Combine("wwwroot/uploads/projects", fileName);
+
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await formData.Image.CopyToAsync(stream);
+                }
+
+                // Save the relative path to database
+                projectEntity.Image = $"/uploads/projects/{fileName}";
+            }
+
+            var updateResult = await _projectRepository.UpdateAsync(projectEntity);
+
+            if (!updateResult.Succeeded)
+                return new ProjectResult
+                    { Succeeded = false, StatusCode = updateResult.StatusCode, Error = updateResult.Error };
+        }
+
+        return new ProjectResult { Succeeded = true, StatusCode = 200 };
+        
     }
 }

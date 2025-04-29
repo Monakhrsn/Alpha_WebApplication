@@ -64,4 +64,20 @@ public class ProjectRepository(DataContext context) : BaseRepository<ProjectEnti
             };
         }
     }
+    
+    public async Task<RepositoryResult<ProjectEntity>> GetByIdAsync(string id)
+    {
+        try
+        {
+            var entity = await _context.Projects.FindAsync(id);
+            if (entity == null)
+                return new RepositoryResult<ProjectEntity> { Succeeded = false, StatusCode = 404, Error = "Not found." };
+
+            return new RepositoryResult<ProjectEntity> { Succeeded = true, StatusCode = 200, Result = entity };
+        }
+        catch (Exception ex)
+        {
+            return new RepositoryResult<ProjectEntity> { Succeeded = false, StatusCode = 500, Error = ex.Message };
+        }
+    }
 }

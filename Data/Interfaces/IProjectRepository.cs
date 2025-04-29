@@ -9,4 +9,6 @@ public interface IProjectRepository : IBaseRepository<ProjectEntity, Project>
 {
     public Task<RepositoryResult<int>> GetCountAsync(string userId);
     public Task<RepositoryResult<int>> GetCountAsync(string userId, bool isCompleted);
+    public Task<RepositoryResult<ProjectEntity>> GetByIdAsync(string id);
+
 }

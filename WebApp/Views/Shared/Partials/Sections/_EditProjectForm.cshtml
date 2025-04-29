@@ -8,15 +8,16 @@
             <button type="button" class="btn-close" data-close="true" data-type="modal" data-target="#edit-project-modal" ></button>
         </div>
         
-        <form id="modal-form" class="card-body" novalidate method="post" enctype="multipart/form-data" asp-action="Edit" data-type="modal" asp-controller="Projects">
+        <form id="modal-form" class="card-body" novalidate method="post" enctype="multipart/form-data" asp-action="Update" data-type="modal" asp-controller="Projects">
+            <input type="hidden" asp-for="Id" />
             <div class="image-previewer square">
-                <img class="image-preview" src=""  alt=""/>
+                <img class="image-preview" src="" alt=""/>
                 <input asp-for="Image" accept="image/*" class="hide">
             </div>
             <div class="form-group">
-                <label  asp-for="ProjectName" ></label>
+                <label asp-for="ProjectName"></label>
                 <div class="field-group">
-                    <input asp-for="ProjectName" />
+                    <input asp-for="ProjectName"/>
                     <span asp-validation-for="ProjectName"></span>
                 </div>
             </div>
@@ -27,51 +28,54 @@
                         <span class="form-select-text"></span>
                     </button>
                     <ul class="form-select-options">
-                        <li class="form-select-option" data-value="1">Client 1</li>
-                        <li class="form-select-option" data-value="2">Client 2</li>
+                        @foreach (var client in (IEnumerable<Domain.Models.Client>)ViewBag.Clients)
+                        {
+                            <li class="form-select-option" data-value="@client.Id">@client.Name</li>
+                        }
                     </ul>
-                    <input type="hidden" asp-for="ClientId" />
+                    <input type="hidden" asp-for="ClientId"/>
                 </div>
             </div>
 
-            <div edit-project-description class="form-group">
-                <label class="form-label" asp-for="Description" ></label>
+            <div class="form-group">
+                <label class="form-label" asp-for="Description"></label>
+                <input id="edit-project-description" asp-for="Description" type="hidden"></input>
                 <div id="edit-project-description-wysiwyg-editor" class="wysiwyg-editor"></div>
                 <div id="edit-project-description-wysiwyg-toolbar" class="wysiwyg-toolbar">
                     <span class="ql-formats">
-                      <button class="ql-bold"></button>
-                      <button class="ql-italic"></button>
-                      <button class="ql-underline"></button>
+                        <button class="ql-bold"></button>
+                        <button class="ql-italic"></button>
+                        <button class="ql-underline"></button>
                     </span>
                     <span class="ql-formats">
-                      <button class="ql-align" value=""></button>
-                      <button class="ql-align" value="center"></button>
-                      <button class="ql-align" value="right"></button>
+                        <button class="ql-align" value=""></button>
+                        <button class="ql-align" value="center"></button>
+                        <button class="ql-align" value="right"></button>
                     </span>
                     <span class="ql-formats">
-                      <button class="ql-list" value="bullet"></button>
-                      <button class="ql-list" value="ordered"></button>
+                        <button class="ql-list" value="bullet"></button>
+                        <button class="ql-list" value="ordered"></button>
                     </span>
                     <span class="ql-formats">
                         <button class="ql-link"></button>
                     </span>
                 </div>
             </div>
-            
+
             <div class="form-horizontal-group">
                 <div class="form-group">
                     <label class="form-label" asp-for="StartDate"></label>
-                    <input class="form-input" asp-for="StartDate" />
+                    <input class="form-input" asp-for="StartDate"/>
                     <span asp-validation-for="StartDate"></span>
                 </div>
                 <div class="form-group">
                     <label class="form-label" asp-for="EndDate"></label>
-                    <input class="form-input" asp-for="EndDate" />
+                    <input class="form-input" asp-for="EndDate"/>
                     <span asp-validation-for="EndDate"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label class="form-label" >Member</label>
+                <label class="form-label">Member</label>
                 <div class="form-select" data-placeholder="Choose a member">
                     <button type="button" class="form-select-trigger">
                         <span class="form-select-text"></span>
@@ -80,32 +84,18 @@
                         <li class="form-select-option" data-value="1">John Doe</li>
                         <li class="form-select-option" data-value="2">Sara Caner</li>
                     </ul>
-                    <input type="hidden" name="member-select-value" />
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label" asp-for="Budget"  ></label>
-                <div class="field-group">
-                    <input class="form-input" asp-for="Budget" />
-                    <div class="form-input-extended">
-                        <i class="fa-duotone fa-solid fa-dollar-sign"></i>
-                        <span asp-validation-for="Budget"></span>
-                    </div>
+                    <input type="hidden" name="member-select-value"/>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label" asp-for="StatusId"></label>
-                <div class="form-select" data-placeholder="Choose a status">
-                    <button type="button" class="form-select-trigger">
-                        <span class="form-select-text"></span>
-                    </button>
-                    <ul class="form-select-options">
-                        <li class="form-select-option" data-value="1">STARTED</li>
-                        <li class="form-select-option" data-value="2">COMPLETED</li>
-                    </ul>
-                    <input type="hidden" asp-for="StatusId" />
+                <label class="form-label" asp-for="Budget"></label>
+                <div class="field-group">
+                    <input class="form-input" asp-for="Budget"/>
+                    <div class="form-input-extended">
+                        <i class="fa-duotone fa-solid fa-dollar-sign"></i>
+                        <span asp-validation-for="Budget"></span>
+                    </div>
                 </div>
             </div>
 

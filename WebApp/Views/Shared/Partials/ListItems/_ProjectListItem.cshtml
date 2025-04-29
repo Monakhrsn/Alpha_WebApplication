@@ -16,7 +16,22 @@
             <div id="project-dropdown-@Model.Id" class="dropdown">
                 <div class="dropdown-body">
                     <nav class="dropdown-actions">
-                        <button data-type="modal" data-target="#edit-project-modal" class="dropdown-action">
+                        <button 
+                            type="button" 
+                            data-type="modal" 
+                            data-target="#edit-project-modal" 
+                            class="dropdown-action btn-edit-project"
+                            data-id="@Model.Id"
+                            data-projectname="@Model.ProjectName"
+                            data-description="@Model.Description"
+                            data-startdate="@Model.StartDate.ToString("yyyy-MM-dd")"
+                            data-enddate="@Model.EndDate?.ToString("yyyy-MM-dd")"
+                            data-clientid="@Model.Client?.Id"
+                            data-statusid="@Model.Status?.Id"
+                            data-budget="@Model.Budget"
+                            data-image="@(string.IsNullOrEmpty(Model.Image) ? "" : Model.Image)"
+                            
+                            >
                             <i class="fa-solid fa-pen-to-square"></i>
                             <span>Edit</span>
                         </button>

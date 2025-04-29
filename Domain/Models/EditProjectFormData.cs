@@ -5,7 +5,7 @@ namespace Domain.Models;
 //EditFormDto 
 public class EditProjectFormData
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
     
     [DataType(DataType.Upload)]
     [Display(Name = "Project Image" , Prompt = "Select an image")]
@@ -36,7 +36,4 @@ public class EditProjectFormData
     [Display(Name = "Client" , Prompt = "Choose a client")]
     public string ClientId { get; set; } = null!;
     public string UserId { get; set; } = null!;
-    
-    [Display(Name = "Status" , Prompt = "Project status")]
-    public int StatusId { get; set; }
 }
