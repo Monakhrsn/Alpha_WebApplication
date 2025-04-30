@@ -8,7 +8,6 @@ public class AddProjectViewModel
 {
     [DataType(DataType.Upload)]
     [Display(Name = "Project Image" , Prompt = "Select an image")]
-
     public IFormFile? Image { get; set; }
     
     [DataType(DataType.Text)]
@@ -27,13 +26,13 @@ public class AddProjectViewModel
     public string Description { get; set; } = null!;
     
     
-    [DataType(DataType.DateTime)]
-    [Display(Name = "Start date" , Prompt = "Start date")]
+    [DataType(DataType.Date)]
+    [Display(Name = "Start Date" , Prompt = "Start date")]
     [Required(ErrorMessage = "Required")]
-    public DateTime StartDate { get; set; }
+    public DateTime? StartDate { get; set; }
     
-    [DataType(DataType.DateTime)]
-    [Display(Name = "End date" , Prompt = "End date")]
+    [DataType(DataType.Date)]
+    [Display(Name = "End Date" , Prompt = "End date")]
     public DateTime? EndDate { get; set; }
     
     [DataType(DataType.Currency)]

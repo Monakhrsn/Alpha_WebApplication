@@ -57,7 +57,15 @@ public class ProjectsController(IProjectService projectService, IClientService c
      public async Task<IActionResult> Add(AddProjectViewModel model)
      {
          if (!ModelState.IsValid)
-             return BadRequest(new { error = "Invalid project data submitted." });
+         {
+             var errors = ModelState
+                 .Where(x => x.Value?.Errors.Count > 0)
+                 .ToDictionary(
+                     kvp => kvp.Key,
+                     kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToArray()
+                 );
+             return BadRequest(new { success = false, errors });
+         }
          
          var addProjectFormData = model.MapTo<AddProjectFormData>();
          addProjectFormData.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
