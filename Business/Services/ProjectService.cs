@@ -1,5 +1,4 @@
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using Business.Interfaces;
 using Business.Models;
 using Data.Entities;
@@ -24,7 +23,7 @@ public class ProjectService(IProjectRepository projectRepository) : IProjectServ
             : new ProjectResult { Succeeded = false, StatusCode = result.StatusCode, Error = result.Error };
     }
     
-    public async Task<ProjectResult<IEnumerable<Project>>> GetProjectsAsync(string userId)
+    public async Task<ProjectResult<IEnumerable<Project>>> GetAllProjectsAsync(string userId)
     {
         
         var response = await _projectRepository.GetAllAsync<ProjectEntity>

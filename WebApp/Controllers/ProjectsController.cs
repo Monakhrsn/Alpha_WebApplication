@@ -30,7 +30,7 @@ public class ProjectsController(IProjectService projectService, IClientService c
         else if (status.ToLower().Equals("started"))
             result = await _projectService.GetProjectsAsync(userId, false);
         else
-            result = await _projectService.GetProjectsAsync(userId);
+            result = await _projectService.GetAllProjectsAsync(userId);
         
         var clientResult = await _clientService.GetClientsAsync();
         ViewBag.Clients = clientResult.Result;
