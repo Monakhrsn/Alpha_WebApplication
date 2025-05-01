@@ -23,6 +23,7 @@ public class EditProjectViewModel
     
     [DataType(DataType.Text)]
     [Display(Name = "Description")]
+    [Required(ErrorMessage = "Required")]
     public string? Description { get; set; }
     
     [DataType(DataType.Date)]
@@ -36,6 +37,7 @@ public class EditProjectViewModel
     
     [DataType(DataType.Currency)]
     [Display(Name = "Budget")]
+    [Required(ErrorMessage = "Required")]
     public decimal? Budget { get; set; }
     
     [Display(Name = "Status")]

@@ -87,7 +87,13 @@ public class ProjectsController(IProjectService projectService, IClientService c
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(new { error = "Invalid project data submitted." });
+             var errors = ModelState
+                 .Where(x => x.Value?.Errors.Count > 0)
+                 .ToDictionary(
+                     kvp => kvp.Key,
+                     kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToArray()
+                 );
+             return BadRequest(new { success = false, errors });
         }
 
         var updateData = model.MapTo<EditProjectFormData>();
