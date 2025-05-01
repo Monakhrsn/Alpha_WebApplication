@@ -29,7 +29,7 @@ public class EditProjectViewModel
     [DataType(DataType.Date)]
     [Display(Name = "Start date")]
     [Required(ErrorMessage = "Required")]
-    public DateTime StartDate { get; set; }
+    public DateTime? StartDate { get; set; }
     
     [DataType(DataType.Date)]
     [Display(Name = "End date")]

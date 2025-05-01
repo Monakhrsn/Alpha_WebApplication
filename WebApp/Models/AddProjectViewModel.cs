@@ -24,12 +24,12 @@ public class AddProjectViewModel
     [Display(Name = "Description" , Prompt = "Describe about the project")]
     [Required(ErrorMessage = "Required")]
     public string Description { get; set; } = null!;
-    
-    
+
+
     [DataType(DataType.Date)]
-    [Display(Name = "Start Date" , Prompt = "Start date")]
+    [Display(Name = "Start Date", Prompt = "Start date")]
     [Required(ErrorMessage = "Required")]
-    public DateTime StartDate { get; set; }
+    public DateTime? StartDate { get; set; } = null;
     
     [DataType(DataType.Date)]
     [Display(Name = "End Date" , Prompt = "End date")]

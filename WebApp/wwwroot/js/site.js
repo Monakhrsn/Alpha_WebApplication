@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             
             if (button.classList.contains('btn-edit-project')) {
+                debugger
                 modal.querySelector('input[name="ProjectName"]').value = button.dataset.projectname || '';
                 modal.querySelector('input[name="ClientId"]').value = button.dataset.clientid || '';
                 modal.querySelector('input[name="StartDate"]').value = button.dataset.startdate || '';

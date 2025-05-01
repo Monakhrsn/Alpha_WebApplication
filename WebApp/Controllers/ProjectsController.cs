@@ -68,6 +68,7 @@ public class ProjectsController(IProjectService projectService, IClientService c
          }
          
          var addProjectFormData = model.MapTo<AddProjectFormData>();
+         addProjectFormData.StartDate = model.StartDate!.Value;
          addProjectFormData.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
          
          var result = await _projectService.CreateProjectAsync(addProjectFormData);
@@ -97,6 +98,7 @@ public class ProjectsController(IProjectService projectService, IClientService c
         }
 
         var updateData = model.MapTo<EditProjectFormData>();
+        updateData.StartDate = model.StartDate!.Value;
         var result = await _projectService.UpdateProjectAsync(updateData);
 
         if (!result.Succeeded)
