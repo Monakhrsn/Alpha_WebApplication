@@ -9,22 +9,13 @@ using Domain.Models;
 
 namespace Domain.Services;
 
-public class ProjectService(IProjectRepository projectRepository, IStatusService statusService) : IProjectService
+public class ProjectService(IProjectRepository projectRepository) : IProjectService
 {
     private readonly IProjectRepository _projectRepository = projectRepository;
-    private readonly IStatusService _statusService = statusService;
 
     public async Task<ProjectResult> CreateProjectAsync(AddProjectFormData formData)
     {
-        var statusResult = await _statusService.GetStatusByIdAsync(1);
-
-        if (!statusResult.Succeeded || statusResult.Result == null)
-            return new ProjectResult { Succeeded = false, StatusCode = 400, Error = "Not all required field are supplied."};
-
         var projectEntity = formData.MapTo<ProjectEntity>();
-        var status = statusResult.Result;
-        
-        projectEntity.StatusId = status.Id;
        
         var result = await _projectRepository.AddAsync(projectEntity);
         
@@ -43,7 +34,6 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
               sortBy: s => s.Created, 
               where: s => s.UserId == userId,
               include => include.User,
-              include => include.Status,
               include => include.Client
             );
         var result = response.Result!.Select(p =>
@@ -51,7 +41,6 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
             var target = p.MapTo<Project>();
 
             target.Client = p.Client.MapTo<Client>();
-            target.Status = p.Status.MapTo<Status>();
             target.User = p.Client.MapTo<User>();
             return target;
         });
@@ -76,7 +65,6 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
             sortBy: s => s.Created, 
             where: whereClause,
             include => include.User,
-            include => include.Status,
             include => include.Client
         );
         var result = response.Result!.Select(p =>
@@ -84,7 +72,6 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
             var target = p.MapTo<Project>();
 
             target.Client = p.Client.MapTo<Client>();
-            target.Status = p.Status.MapTo<Status>();
             target.User = p.Client.MapTo<User>();
             return target;
         });

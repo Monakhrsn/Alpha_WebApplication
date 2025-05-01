@@ -103,9 +103,6 @@ namespace Data.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("date");
 
-                    b.Property<int>("StatusId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -114,38 +111,9 @@ namespace Data.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("StatusId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("Data.Entities.StatusEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("StatusName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StatusName")
-                        .IsUnique();
-
-                    b.ToTable("Statuses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            StatusName = "Active"
-                        });
                 });
 
             modelBuilder.Entity("Data.Entities.UserEntity", b =>
@@ -374,12 +342,6 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Entities.StatusEntity", "Status")
-                        .WithMany("Projects")
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Data.Entities.UserEntity", "User")
                         .WithMany("Projects")
                         .HasForeignKey("UserId")
@@ -387,8 +349,6 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Client");
-
-                    b.Navigation("Status");
 
                     b.Navigation("User");
                 });
@@ -445,11 +405,6 @@ namespace Data.Migrations
                 });
 
             modelBuilder.Entity("Data.Entities.ClientEntity", b =>
-                {
-                    b.Navigation("Projects");
-                });
-
-            modelBuilder.Entity("Data.Entities.StatusEntity", b =>
                 {
                     b.Navigation("Projects");
                 });

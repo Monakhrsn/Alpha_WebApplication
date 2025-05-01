@@ -35,5 +35,4 @@ public class AddProjectFormData
     [Display(Name = "Client" , Prompt = "Choose a client")]
     public string ClientId { get; set; } = null!;
     public string UserId { get; set; } = null!;
-    public int StatusId { get; set; }
 }
