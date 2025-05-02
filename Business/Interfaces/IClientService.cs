@@ -5,6 +5,6 @@ namespace Business.Interfaces;
 
 public interface IClientService
 {
-    Task<ClientResult> CreateAsync(AddClientForm addClientForm);   
+    Task<ClientResult> CreateAsync(AddClientFormData addClientFormData);   
     Task<ClientResult> GetClientsAsync();
 }

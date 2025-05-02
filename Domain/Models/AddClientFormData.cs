@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Domain.Models;
 
-public class AddClientForm
+public class AddClientFormData
 {
     [DataType(DataType.Upload)]
     [Display(Name = "Client Image" , Prompt = "Select an image")]

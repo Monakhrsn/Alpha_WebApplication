@@ -11,9 +11,9 @@ public class ClientService(IClientRepository clientRepository) : IClientService
 {
     private readonly IClientRepository _clientRepository = clientRepository;
     
-    public async Task<ClientResult> CreateAsync(AddClientForm addClientForm)
+    public async Task<ClientResult> CreateAsync(AddClientFormData addClientFormData)
     {
-        var clientEntity = addClientForm.MapTo<ClientEntity>();
+        var clientEntity = addClientFormData.MapTo<ClientEntity>();
         var result = await _clientRepository.AddAsync(clientEntity);
         
         return result.Succeeded

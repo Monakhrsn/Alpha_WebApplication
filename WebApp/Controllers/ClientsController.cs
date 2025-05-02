@@ -27,7 +27,7 @@ public class ClientsController : Controller
        {
            Clients = clientResult.Result!,
            EditProjectFormData = new EditClientForm(),
-           AddClientForm = new AddClientForm()
+           AddClientFormData = new AddClientFormData()
            
        };
        
@@ -35,7 +35,7 @@ public class ClientsController : Controller
    }
    
    [HttpPost]
-    public async Task<IActionResult> Add(AddClientForm form)
+    public async Task<IActionResult> Add(AddClientFormData form)
     {
         if (!ModelState.IsValid)
         {
