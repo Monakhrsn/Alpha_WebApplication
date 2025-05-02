@@ -109,9 +109,15 @@ public class ProjectsController(IProjectService projectService, IClientService c
         return Json(new { message = "Project updated successfully." });
     }
      
-    [HttpPost("delete")]
-    public IActionResult Delete(string id)
+    [HttpPost("delete/{id}")]
+    public async Task<IActionResult> Delete(string id)
     {
-        return Json(new {});
+        var result = await _projectService.DeleteProjectAsync(id);
+        if (!result.Succeeded)
+        {
+            return BadRequest(new { error = result.Error });
+        }
+
+        return RedirectToAction("Index");
     }
 }

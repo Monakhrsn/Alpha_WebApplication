@@ -142,4 +142,23 @@ public class ProjectService(IProjectRepository projectRepository) : IProjectServ
         return new ProjectResult { Succeeded = true, StatusCode = 200 };
         
     }
+
+    public async Task<ProjectResult<bool>> DeleteProjectAsync(string userId)
+    {
+        var projectEntityResult = await _projectRepository.GetByIdAsync(userId);
+        
+        if (!projectEntityResult.Succeeded)
+        {
+            return new ProjectResult<bool> { Succeeded = false, StatusCode = 404, Error = "Project not found." };
+        }
+
+        var deleteResult = await _projectRepository.DeleteAsync(projectEntityResult.Result!);
+
+        if (!deleteResult.Succeeded)
+        {
+            return new ProjectResult<bool> { Succeeded = false, StatusCode = 500, Error = deleteResult.Error };
+        }
+        
+        return new ProjectResult<bool> { Succeeded = true, StatusCode = 200 };
+    }
 }

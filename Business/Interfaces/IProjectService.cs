@@ -11,4 +11,5 @@ public interface IProjectService
     Task<ProjectResult<int>> GetProjectsCountAsync(string userId);
     Task<ProjectResult<int>> GetProjectsCountAsync(string userId, bool isCompleted);
     Task<ProjectResult> UpdateProjectAsync(EditProjectFormData formData);
+    Task<ProjectResult<bool>> DeleteProjectAsync(string userId);
 }

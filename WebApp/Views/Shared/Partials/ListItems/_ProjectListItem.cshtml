@@ -41,10 +41,12 @@
                     </nav>
                     <div class="divider"></div>
                     <nav class="dropdown-actions">
-                        <button class="dropdown-action remove" href="@Url.Action("Delete", "Projects", Model.Id)">
-                            <i class="fa-solid fa-trash"></i>
-                            <span>Delete Project</span>
-                        </button>
+                        <form method="post" asp-controller="Projects" asp-action="Delete" asp-route-id="@Model.Id">
+                            <button class="dropdown-action remove" type="submit">
+                                <i class="fa-solid fa-trash"></i>
+                                <span>Delete Project</span>
+                            </button>
+                        </form>
                     </nav>
                 </div>
             </div>

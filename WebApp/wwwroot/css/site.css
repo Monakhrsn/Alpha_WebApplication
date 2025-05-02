@@ -144,7 +144,7 @@
   
   --switch-background-color: var(--gray-300);
   --switch-slider-color: var(--white-100); 
-  --switch-checked-background-color: var(--gray-400);
+  --switch-checked-background-color: var(--blue-accent);
 
   /*--account-option-text-color: var(--white-200);
   --account-option-background-color: var(--transparent);
@@ -316,12 +316,13 @@ form .form-select .form-select-options {
   right: 0;
   background-color: var(--white-100);
   border: 1px solid var(--border-color);
-  border-top: none;
+  /*border-top: none;*/
   z-index: 10;
   display: none;
   max-height: 200px;
   overflow-y: auto;
   border-radius: 0 0 16px 16px;
+  
 }
 
 form .form-select .form-select-options.show {
@@ -1387,7 +1388,7 @@ input[type="checkbox"]{
 
 #notification-container {
   position: relative;
-  min-width: 150px;
+  min-width: 60px;
 }
 
 #notification-container .dropdown {
@@ -1540,6 +1541,10 @@ input[type="checkbox"]{
   align-items: center;
   gap: 0.5em;
   cursor: pointer;
+}
+
+.switch-label i {
+  margin-right: 1rem;
 }
 
 .switch {
