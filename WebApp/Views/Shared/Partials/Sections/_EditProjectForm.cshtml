@@ -95,7 +95,7 @@
             <div class="form-group">
                 <label class="form-label" asp-for="Budget"></label>
                 <div class="field-group">
-                    <input asp-for="Budget" class="form-control form-input @(ViewData.ModelState["Budget"]?.Errors.Any() == true ? "is-invalid" : "")" />
+                    <input asp-for="Budget" class="form-control form-input budget-input @(ViewData.ModelState["Budget"]?.Errors.Any() == true ? "is-invalid" : "")" />
 
                     <div class="form-input-extended">
                         <i class="fa-duotone fa-solid fa-dollar-sign"></i>

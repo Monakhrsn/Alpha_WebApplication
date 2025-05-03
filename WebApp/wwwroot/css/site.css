@@ -145,11 +145,6 @@
   --switch-background-color: var(--gray-300);
   --switch-slider-color: var(--white-100); 
   --switch-checked-background-color: var(--blue-accent);
-
-  /*--account-option-text-color: var(--white-200);
-  --account-option-background-color: var(--transparent);
-  --account-option-background-hover-color: var(--blue-light-opacity);
-  --account-option-text-hover-color: var(--white-200);*/
   
   --user-notification-text-color: var(--dark-400);
   --user-notification-background-color: var(--transparent);
@@ -176,10 +171,6 @@
   --error-background-color: var(--red-light);
   --error-text-color: var(--red-dark);
   --error-border-color: var(--red-semilight);
-
-  /*
-  have to check out for duplication
-  */
   
   --form-text-color: var(--dark-400);
   --form-border-color: var(--white-100);
@@ -279,10 +270,6 @@ form .form-check {
   text-align: left;
 }
 
-form .form-group .form-label {
-  
-}
-
 form .form-select {
     position: relative;
     width: 100%;
@@ -322,7 +309,6 @@ form .form-select .form-select-options {
   max-height: 200px;
   overflow-y: auto;
   border-radius: 0 0 16px 16px;
-  
 }
 
 form .form-select .form-select-options.show {
@@ -380,6 +366,10 @@ form .form-search-input::placeholder {
 
 .form-input-extended .form-input {
   padding-left: 2rem;
+}
+
+.form-input.budget-input {
+  padding: 0.5rem 1rem .5rem 2rem;
 }
 
 .search-form {
@@ -675,7 +665,6 @@ a:hover {
   font-family: var(--font-fa-free);
 }
 
-
 .btn-close {
   transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
   cursor: pointer;
@@ -704,19 +693,6 @@ a:hover {
 .btn-close:hover:focus {
   outline: none;
 }
-
-
-
-/*.btn-close {
-  color: var(--btn-close-text-color);
-  border: 1px solid var(--btn-close-border-color);
-  background-color: var(--btn-close-background-color);
-  z-index: 999;
-  font-size: 1.4rem;
-  cursor: pointer;
-}*/
-
-
 
 .btn-close::after {
   /*content: '\f00d'; */
@@ -787,7 +763,6 @@ a:hover {
   grid-area: email;
   color: var(--text-muted-color)
 }
-/* font */
 
 /* badges */
 .badge {
@@ -1100,9 +1075,6 @@ input[type="checkbox"]{
   width: 15px;
 }
 
-
-
-/* views/pages */
 /* sections */
 #team-members {
   display: grid;
@@ -1271,10 +1243,6 @@ input[type="checkbox"]{
   margin: 0 1rem;
 }
 
-.dropdown .dropdown-body {
- 
-}
-
 .dropdown .dropdown-footer {
   
 }
@@ -1423,7 +1391,6 @@ input[type="checkbox"]{
   color: var(--user-notification-text-hover-color);
   border: 2px solid var(--user-notification-border-hover-color);
   background-color: var(--user-notification-background-hover-color);
-
 }
 
 #notification-container .notifications .notification img {
@@ -1503,7 +1470,7 @@ input[type="checkbox"]{
 
 #projects .project-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
 
