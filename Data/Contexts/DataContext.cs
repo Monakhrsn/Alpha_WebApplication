@@ -9,7 +9,10 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
     public virtual DbSet<ClientEntity> Clients { get; set; }
     public virtual DbSet<ProjectEntity> Projects { get; set; }
     
+    public virtual DbSet<MemberEntity> Members { get; set; }
+    
     public virtual DbSet<MemberAddressEntity> MemberAddresses { get; set; }
+    
     
     
     //Chatgpt, To seed status. It is a hook provided by Entity Framework Core that allows

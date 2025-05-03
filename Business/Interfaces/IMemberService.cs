@@ -1,6 +1,9 @@
+using Business.Models;
+using Domain.Models;
+
 namespace Business.Interfaces;
 
-public interface IMemberService
+public interface IMemberService 
 {
-    /*Task<IEnumerable<Member>> GetAllMembers();*/
+    Task<MemberResult> GetMembersAsync();
 }

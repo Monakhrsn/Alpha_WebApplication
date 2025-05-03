@@ -1,6 +1,8 @@
+using Business.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.ViewModels;
 
 namespace WebApp.Controllers;
 
@@ -8,10 +10,25 @@ namespace WebApp.Controllers;
 [Route("admin/[controller]")]
 public class MembersController : Controller
 {
-    [HttpGet]
-    public IActionResult Index()
+    private readonly IMemberService _memberService;
+
+    public MembersController(IMemberService memberService)
     {
-        return View();
+        _memberService = memberService;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Index()
+    {
+        var membersResult = await _memberService.GetMembersAsync();
+        
+        var viewModel = new MembersViewModel
+        {
+            Members = membersResult.Result!, // make sure .Result is not null
+            NewMemberForm = new AddMemberForm()
+        };
+        
+        return View(viewModel);
     }
     
     [HttpPost]

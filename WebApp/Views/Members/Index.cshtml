@@ -1,18 +1,18 @@
-@model WebApp.ViewModels.MembersViewModel
-
 @{
     ViewData["Title"] = "Team Members";
 }
 
-<partial name="Partials/Sections/_AddMemberForm" model="Model.NewMemberForm" />
+@model WebApp.ViewModels.MembersViewModel
+
+@await Html.PartialAsync("Partials/Sections/_AddMemberForm", Model.NewMemberForm)
 
 <section id="team-members">
     <header class="flex-between">
         <h1>@ViewData["Title"]</h1>
-        <button type="button"  data-modal="true" data-target="#add-member-modal" class="btn btn-add btn-blue">Add Member</button>
+        <button type="button"  data-type="modal" data-target="#add-member-modal" class="btn btn-add btn-blue">Add Member</button>
     </header>
     <div class="members-list">
-        @if (Model.Members != null && Model.Members.Any())
+        @if (Model.Members.Any())
         {
             @foreach (var member in Model.Members)
             {
