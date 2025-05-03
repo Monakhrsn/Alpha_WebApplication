@@ -26,7 +26,7 @@ public class ClientsController : Controller
        var viewModel = new ClientsViewModel()
        {
            Clients = clientResult.Result!,
-           EditProjectFormData = new EditClientForm(),
+           EditProjectFormData = new EditClientFormData(),
            AddClientFormData = new AddClientFormData()
            
        };
@@ -60,7 +60,7 @@ public class ClientsController : Controller
     }
     
     [HttpPut]
-    public IActionResult Edit(EditClientForm form)
+    public IActionResult Edit(EditClientFormData formData)
     {
         if(!ModelState.IsValid)
             if (!ModelState.IsValid)

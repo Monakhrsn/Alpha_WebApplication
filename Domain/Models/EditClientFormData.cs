@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Domain.Models;
 
-public class EditClientForm
+public class EditClientFormData
 {
     public int Id { get; set; }
     

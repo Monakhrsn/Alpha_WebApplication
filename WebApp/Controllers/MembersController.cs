@@ -25,14 +25,14 @@ public class MembersController : Controller
         var viewModel = new MembersViewModel
         {
             Members = membersResult.Result!, // make sure .Result is not null
-            NewMemberForm = new AddMemberForm()
+            NewMemberForm = new AddMemberFormData()
         };
         
         return View(viewModel);
     }
     
     [HttpPost]
-    public IActionResult Add(AddMemberForm form)
+    public IActionResult Add(AddMemberFormData formData)
     {
         if (!ModelState.IsValid)
         {
@@ -50,7 +50,7 @@ public class MembersController : Controller
     }
     
     [HttpPost]
-    public IActionResult Edit(EditMemberForm form)
+    public IActionResult Edit(EditMemberFormData formData)
     {
         if(!ModelState.IsValid)
             if (!ModelState.IsValid)

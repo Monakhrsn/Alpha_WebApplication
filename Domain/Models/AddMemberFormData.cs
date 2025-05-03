@@ -3,12 +3,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace Domain.Models;
 
-public class EditMemberForm
+public class AddMemberFormData
 {
-    public int Id { get; set; }
-    
     [DataType(DataType.Upload)]
     [Display(Name = "Member Image" , Prompt = "Select an image")]
+
     public IFormFile? MemberImage { get; set; }
     
     [DataType(DataType.Text)]
