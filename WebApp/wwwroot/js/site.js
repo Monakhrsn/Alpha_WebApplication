@@ -84,20 +84,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 modal.style.display = 'flex';
             
             if (!editProjectDescriptionQuill) {
-                editProjectDescriptionTextarea = document.getElementById('edit-project-description');
-                editProjectDescriptionQuill = new Quill('#edit-project-description-wysiwyg-editor', {
-                    modules: {
-                        syntax: true,
-                        toolbar: '#edit-project-description-wysiwyg-toolbar',
-                    },
-                    theme: 'snow',
-                    placeholder: 'Type something.. .'
-                })
+                const editEditorContainer = document.querySelector('#edit-project-description-wysiwyg-editor');
+                if (editEditorContainer) {
+                    editProjectDescriptionTextarea = document.getElementById('edit-project-description');
+                    editProjectDescriptionQuill = new Quill('#edit-project-description-wysiwyg-editor', {
+                        modules: {
+                            syntax: true,
+                            toolbar: '#edit-project-description-wysiwyg-toolbar',
+                        },
+                        theme: 'snow',
+                        placeholder: 'Type something.. .'
+                    })
 
-                editProjectDescriptionQuill.on('text-change', function () {
-                    if (editProjectDescriptionTextarea)
-                        editProjectDescriptionTextarea.value = editProjectDescriptionQuill.root.innerHTML;
-                })
+                    editProjectDescriptionQuill.on('text-change', function () {
+                        if (editProjectDescriptionTextarea)
+                            editProjectDescriptionTextarea.value = editProjectDescriptionQuill.root.innerHTML;
+                    })
+                }
             }
             
             if (button.classList.contains('btn-edit-project')) {
@@ -137,20 +140,23 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             
             if (!addProjectDescriptionQuill) {
-                addProjectDescriptionTextarea = document.getElementById('add-project-description');
-                addProjectDescriptionQuill = new Quill('#add-project-description-wysiwyg-editor', {
-                    modules: {
-                        syntax: true,
-                        toolbar: '#add-project-description-wysiwyg-toolbar',
-                    },
-                    theme: 'snow',
-                    placeholder: 'Type something.. .'
-                })
-                
-                addProjectDescriptionQuill.on('text-change', function () {
-                    if (addProjectDescriptionTextarea)
-                        addProjectDescriptionTextarea.value = addProjectDescriptionQuill.root.innerHTML;
-                })
+                const addEditorContainer = document.querySelector('#add-project-description-wysiwyg-editor');
+                if (addEditorContainer) {
+                    addProjectDescriptionTextarea = document.getElementById('add-project-description');
+                    addProjectDescriptionQuill = new Quill('#add-project-description-wysiwyg-editor', {
+                        modules: {
+                            syntax: true,
+                            toolbar: '#add-project-description-wysiwyg-toolbar',
+                        },
+                        theme: 'snow',
+                        placeholder: 'Type something.. .'
+                    })
+
+                    addProjectDescriptionQuill.on('text-change', function () {
+                        if (addProjectDescriptionTextarea)
+                            addProjectDescriptionTextarea.value = addProjectDescriptionQuill.root.innerHTML;
+                    })
+                }
             }
         })
     })
